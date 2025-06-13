@@ -1,0 +1,111 @@
+public class hello {
+
+    public static void main(String[] args) {
+        // Simple for loop
+        for(int i=0;i<=4;i++)  // Initialization; Condition; Update
+        {
+            System.out.println("Hi"+i);  
+            // Output:
+            // Hi0
+            // Hi1
+            // Hi2
+            // Hi3
+            // Hi4
+        }
+        
+        
+        // Nested for loop (Days with time slots)
+        for(int i=1;i<=7;i++)  // Outer loop (Days 1-7)
+        {
+            System.out.println("Day"+i);  
+            // Output (for each day):
+            // Day1, Day2,... Day7
+            
+            for(int j=1;j<=9;j++)  // Inner loop (Time slots)
+            {
+                System.out.println(" "+(j+8)+"-"+(j+9));  
+                // Output for each day (9 time slots):
+                //  9-10
+                //  10-11
+                //  11-12
+                //  12-13
+                //  13-14
+                //  14-15
+                //  15-16
+                //  16-17
+                //  17-18
+            }
+        }
+        
+        
+        // Alternative for loop syntax
+        int i=1;  // Initialization outside loop
+        for(;i<=5;)  // Only condition (no init/update here)
+        {
+            System.out.println("DAY"+i);  
+            // Output:
+            // DAY1
+            // DAY2
+            // DAY3
+            // DAY4
+            // DAY5
+            
+            i++;  // Update inside loop body
+        }
+    }
+}
+
+
+
+Complete Theory & Interview Concepts: For Loops
+1. Basic Structure:
+java
+
+for(initialization; condition; update) {
+    // loop body
+}
+
+2. Execution Flow:
+
+    Initialization (once at start)
+
+    Check condition → if false, exit loop
+
+    Execute body
+
+    Execute update
+
+    Repeat from step 2
+
+3. Key Features:
+
+    Compact syntax: All loop control in one line
+
+    Flexible components: Can omit any part (but keep semicolons)
+
+    Block scope: Variables declared in init are loop-local
+
+4. Variations & Edge Cases:
+java
+
+// Infinite loop
+for(;;) { /*...*/ }
+
+// Multiple variables
+for(int i=0, j=10; i<j; i++, j--)
+
+// No body (all work in update)
+for(int i=0; i<10; System.out.println(i++));
+
+// Enhanced for-each loop (arrays/collections)
+for(String s : stringArray) { /*...*/ }
+
+5. Nested Loops:
+
+    Outer loop runs N times
+
+    Inner loop runs M times for EACH outer iteration
+
+    Total iterations = N × M
+
+    Time complexity: O(n²) for simple nested loops
