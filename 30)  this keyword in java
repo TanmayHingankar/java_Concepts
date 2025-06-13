@@ -1,0 +1,176 @@
+// 🔶 Java: Setter method with object parameter & assignment via another reference
+
+class Human {
+
+	private int age;            // private field
+	private String name;        // private field
+
+	public int getAge() {
+		return age;            // returns value of age
+	}
+
+	public void SetAge(int age, Human obj) {
+		// Human obj1 = new Human();  // ❌ creates new object (not needed)
+		Human obj1 = obj;             // ✅ obj1 refers to same object as obj
+		obj1.age = age;               // sets age using obj1 reference
+
+		// OR we could have used directly: obj.age = age;
+		// OR better: this.age = age;
+	}
+
+	public String getName() {
+		return name;          // returns name
+	}
+
+	public void setName(String name) {
+		this.name = name;     // assigns to current object's name
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) throws ClassNotFoundException {
+		Human obj = new Human();            // creating Human object
+
+		obj.SetAge(30, obj);                // sets age = 30 via object reference
+		obj.setName("Reddy");              // sets name = "Reddy"
+
+		System.out.println(obj.getName() + " : " + obj.getAge());
+		// ✅ Output: Reddy : 30
+	}
+}
+
+
+# **`this` Keyword in Java - Complete Guide** 🔑
+
+## **Definition**  
+**`this`** ek reference variable hai jo *current object* ko point karta hai.  
+
+## **4 Main Uses of `this`**  
+
+### 1. **Instance Variables ko Local Variables se Differentiate Karne Ke Liye**  
+```java
+class Student {
+    String name; // Instance variable
+    
+    Student(String name) { // Parameter (local variable)
+        this.name = name; // this.name = instance variable
+    }
+}
+```
+
+### 2. **Current Object ko Pass/Return Karne Ke Liye**  
+```java
+class Demo {
+    Demo getObject() {
+        return this; // Returns current object
+    }
+}
+```
+
+### 3. **Constructor Chaining (Ek Constructor se Dusre ko Call Karne Ke Liye)**  
+```java
+class Demo {
+    Demo() {
+        this(10); // Calls parameterized constructor
+    }
+    
+    Demo(int x) {
+        System.out.println(x);
+    }
+}
+```
+
+### 4. **Method Chaining (Fluid Interfaces Banane Ke Liye)**  
+```java
+class Calculator {
+    Calculator add(int a) {
+        // ...logic
+        return this; // Enables chaining
+    }
+    
+    Calculator sub(int b) {
+        // ...logic
+        return this;
+    }
+}
+
+// Usage:
+new Calculator().add(5).sub(2);
+```
+
+---
+
+## **Interview Questions & Answers** ❓  
+
+### Q1: `this` vs `super` Keyword?  
+| `this` | `super` |  
+|--------|---------|  
+| Current class ke members ko refer karta hai | Parent class ke members ko refer karta hai |  
+
+### Q2: Kya `this` static methods mein use kar sakte hain?  
+❌ **Nahi!** Kyunki static methods object se related nahi hote.  
+
+### Q3: `this()` Constructor Call ka Rules?  
+✅ Must be **first statement** in constructor  
+✅ Only **one `this()`** call per constructor  
+
+### Q4: Why Use `this` in Setters?  
+✅ To avoid **name conflicts** between parameters and instance variables.  
+
+---
+
+## **Pro Tips 💡**  
+✔ **Always use `this` in constructors/setters** for clarity  
+✔ **Method chaining** se code clean banata hai  
+✔ **`this` cannot be used in static context**  
+
+---
+
+## **Memory Diagram 🧠**  
+```
+[ Stack ]  
+main()  
+└── Student s = [ref] → [ Heap ]  
+                   └── Student Object  
+                       ├── name = "Rahul"  
+                       └── this → [points to itself]
+```
+
+**"`this` = Current Object ka Address"**  
+
+
+
+🔹 this vs Object Reference (Advanced)
+Using this	Using object parameter
+this.age = age;	Directly updates the calling object
+obj1.age = age;	Updates only if same object is passed
+Safer & cleaner	More flexible, but avoid if unnecessary
+
+✅ Best Practice: Prefer this.age = age inside the class unless there’s a special reason to update other objects.
+🔹 Why This Code is Special?
+
+    SetAge does not use this, but still updates correctly.
+
+    Why? Because you're passing the same object (obj) to itself → so obj1.age = age; affects the same instance.
+
+🔹 Interview Points: Object References & Setter Logic
+Concept	Explanation
+Object Reference	All object variables hold reference to memory
+Pass by Reference in Java	Java is pass by value, but for objects, value = reference
+Human obj1 = obj;	obj1 and obj point to the same object
+Modifying via obj1	Changes reflect on obj
+🔹 Short Recap Table: this, setter, and object passing
+Feature	Description
+this	Refers to current object
+Setter with this	this.age = age; → sets current object's field
+Setter with object	Can modify external objects if reference is passed
+Output	Same as this usage if same object is passed
+✅ Final Notes for Your Revision
+
+    Use this when your method parameter name is same as class variable.
+
+    You can pass object references to methods and update them — same memory is modified.
+
+    If you write Human obj1 = new Human(); inside setter, you won’t update the original object — you'll be modifying a new one.
+
+    This concept is heavily asked in Java OOPs interviews to test your reference handling & understanding of object mutability.
