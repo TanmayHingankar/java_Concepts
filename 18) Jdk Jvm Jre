@@ -1,0 +1,101 @@
+✅ JAVA COMPILATION & EXECUTION – BACKSTAGE STORY
+Stage	Tool Involved	What Happens
+Writing Code	Programmer	You write .java file using any editor (like VS Code, IntelliJ, Notepad++)
+
+Compilation	javac	Java compiler compiles .java file into .class (Bytecode)
+
+Execution	JVM	JVM reads .class file, interprets/executes using Just-In-Time (JIT) Compiler
+
+✅ ROLE OF JDK, JRE, JVM (EXPLAINED SIMPLY)
+🔹 JDK (Java Development Kit) 💻
+
+    Complete package used for development.
+
+    Contains: Compiler (javac) + JRE + tools for debugging, documentation, etc.
+
+    Needed when you're writing and compiling code.
+
+📦 JDK
+ ┣ 📄 javac (compiler)
+ ┣ 📂 JRE
+ ┃ ┣ 📄 JVM
+ ┃ ┣ 📄 Libraries
+ ┣ 📄 Tools (javadoc, jdb etc.)
+
+🔹 JRE (Java Runtime Environment) 🏃‍♂️
+
+    Environment where compiled Java code runs.
+
+    Contains JVM + Libraries required to run the program.
+
+    Does not include compiler (javac) – so not suitable for development, only for running.
+
+🔹 JVM (Java Virtual Machine) 🧠
+
+    Heart of Java.
+
+    Takes .class file (Bytecode) → Executes it line-by-line on your actual machine.
+
+    Ensures platform independence by interpreting bytecode.
+
+✅ JAVA PROGRAM FLOW (BEHIND THE SCENES):
+💡 Compilation Flow:
+
+Your Code (Hello.java)
+     |
+     | Compile using javac
+     ↓
+Bytecode (Hello.class) ← Platform Independent ✔️
+     |
+     | Run using java command
+     ↓
+JVM reads Hello.class, converts it to native machine code
+     |
+     ↓
+Runs on your OS/Hardware
+
+✅ BYTECODE – What Is It?
+
+    Intermediate .class file generated after compilation.
+
+    Platform-independent.
+
+    Executed by JVM on any OS (Windows/Linux/Mac).
+
+javac Hello.java   # Compiles and creates Hello.class (bytecode)
+java Hello         # Runs the class using JVM
+
+✅ INTERVIEW FAQs (MUST READ)
+Question	Interview-Worthy Answer
+What's JDK?	JDK is Java Development Kit – it contains JRE + compiler + tools needed for developing Java applications.
+What's JRE?	Java Runtime Environment – it includes JVM + libraries needed to run Java applications.
+What's JVM?	JVM (Java Virtual Machine) executes Java bytecode and makes Java platform-independent.
+What is Bytecode?	Bytecode is intermediate, platform-independent code generated after compilation of a Java program.
+Why is Java platform independent?	Because Java programs compile to Bytecode which runs on JVM – and JVM is available for all platforms.
+
+✅ REAL-LIFE EXAMPLE:
+Scenario	Real-World Equivalent
+.java file	English-written recipe
+javac	Translator converting English recipe to universal symbols
+.class file	Recipe written in symbols anyone can read (Bytecode)
+JVM	A cook (specific to location/OS) who can read and follow the universal recipe
+✅ BONUS: MEMORY FLOW (What Happens in RAM?)
+
+int a = 5;
+int b = 7;
+int sum = a + b;
+
+    a, b, sum are stored in Stack memory
+
+    Class file methods are loaded in Method area
+
+    Objects (if any) go into Heap memory
+
+✅ Quick Revision Summary (Mind Map):
+
+JDK = JRE + javac + tools
+JRE = JVM + Libraries
+JVM = Runs Bytecode
+Bytecode = Platform-independent intermediate code
+javac = Java compiler (generates .class)
+java = Java launcher (runs .class via JVM)
