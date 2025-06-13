@@ -1,0 +1,27 @@
+public class TernaryDemo {
+    public static void main(String[] args) {
+        // Original if-else version (commented out)
+        /*
+        int n = 4;
+        int result = 0;
+        if(n%2 == 0)       // Condition: 4%2 == 0 → true
+            result = 10;    // Executes this line
+        else
+            result = 20;    // Skipped
+        System.out.println(result);  // Output: 10
+        */
+
+        // Ternary operator version
+        int n = 5;                     // Initialize n with 5
+        int result = 0;                // Initialize result
+        result = n%2 == 0 ? 10 : 20;   // Condition: 5%2 == 1 → false → returns 20
+        System.out.println(result);    // Output: 20
+    }
+}
+
+Cheat Sheet
+Concept	Syntax Example	Best Practice
+Basic Ternary	  int x = (cond) ? a : b;	                   Use for simple true/false assignments.
+Null Handling	    String s = (obj!=null) ? obj : "";	     Prefer Objects.requireNonNullElse().
+Type Safety	      var x = (cond) ? "Text" : 0; → Error	   Ensure both expressions have compatible types.
+Readability	Avoid nesting beyond 2 levels.	               Use if-else for complex logic.
