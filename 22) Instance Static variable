@@ -1,0 +1,109 @@
+1. Static vs Instance Variables
+
+Instance Variables (Jisme tumhara num tha):
+
+class Calculator {
+    int num = 5; // Ye hai INSTANCE variable (object ka hissa)
+    
+    public int add() {
+        return num + 10;
+    }
+}
+
+
+Static Variables:
+
+class Calculator {
+    static int count = 0; // Ye hai STATIC variable (class ka hissa)
+    
+    public Calculator() {
+        count++; // Har naye object pe count badhega
+    }
+}
+
+
+Key Differences:
+
+Feature	       Instance Variables	      Static Variables
+Belongs to	 Individual objects	         Class itself
+Memory	    Heap (with object)	     Class area (special memory)
+Access	  Via object (obj.num)	    Via class (Calculator.count)
+Copies	 Each object gets its own	   Only one copy for all objects
+Lifetime	Until object exists        	Until program ends
+
+
+
+
+2. Heap aur Stack Memory
+Memory Architecture:
+text
+
+┌──────────────────────┐
+│       JVM Memory     │
+├──────────────────────┤
+│ 1. Method Area       │ ← Static variables, class info
+│ 2. Heap              │ ← All objects (instance vars)
+│ 3. Stack             │ ← Method calls, local vars
+│ 4. PC Registers      │ ← Thread pointers
+└──────────────────────┘
+
+
+
+4. Heap-Stack in Action
+
+Tumhara original code ka memory view:
+java
+
+Calculator obj = new Calculator();  // Step 1
+Calculator obj1 = new Calculator(); // Step 2
+obj.num = 8;                        // Step 3
+
+Memory mein kya hua:
+text
+
+Stack (main)            Heap
+┌──────────────┐       ┌─────────────────┐ Step 1
+│ obj  ────────┼──────►│ Calculator      │
+│              │       │ num = 5         │
+└──────────────┘       ├─────────────────┤ Step 2
+                       │ Calculator      │
+Stack (main)           │ num = 5         │
+┌──────────────┐       └─────────────────┘
+│ obj1 ────────┼──────┐
+│              │      │
+└──────────────┘      │
+                      ▼
+                   ┌─────────────────┐ Step 3
+                   │ Calculator      │
+                   │ num = 8         │
+                   └─────────────────┘
+
+5. Interview ke Liye Gold Points
+
+    Static Variables:
+
+        Class loading time pe initialize hote hai
+
+        Sab objects share karte hain
+
+        ClassName.staticVar se access karna best practice
+
+    Heap Memory:
+
+        Objects aur unke instance variables yahan store hote hai
+
+        Garbage Collector isi ko clean karta hai
+
+    Stack Memory:
+
+        Method calls aur local variables yahan rehte hai
+
+        Thread-safe (har thread ka apna stack)
+
+    Important Rules:
+
+        Static methods mein sirf static variables access kar sakte ho
+
+        Instance methods dono (static+instance) access kar sakte hai
+
+        Static blocks initialization ke liye use hote hai
