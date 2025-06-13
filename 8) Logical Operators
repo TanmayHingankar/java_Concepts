@@ -1,0 +1,66 @@
+public class hello {
+
+	public static void main(String[] args) {
+		int x = 7;
+		int y = 5;
+		int a = 5;
+		int b = 9;
+
+		// Logical AND: true && true => true
+		boolean result1 = x > y && a < b; // true && true => true ✅
+		System.out.println("result1: " + result1);
+
+		// Logical OR: true || true => true
+		boolean result2 = x > y || a < b; // true || true => true ✅
+		System.out.println("result2: " + result2);
+
+		// Logical AND: true && false => false
+		boolean result3 = x > y && a > b; // true && false => false ❌
+		System.out.println("result3: " + result3);
+
+		// Logical OR: true || false => true
+		boolean result4 = x > y || a > b; // true || false => true ✅
+		System.out.println("result4: " + result4);
+
+		// Logical AND: false && true => false
+		boolean result5 = x < y && a < b; // false && true => false ❌
+		System.out.println("result5: " + result5);
+
+		// Logical OR: false || true => true
+		boolean result6 = x < y || a < b; // false || true => true ✅
+		System.out.println("result6: " + result6);
+
+		// Logical OR: false || true || true => true
+		boolean result7 = x < y || a < b || a > 1; // false || true || true => true ✅
+		System.out.println("result7: " + result7);
+
+		// Logical NOT: a > b => 5 > 9 => false => !false => true
+		boolean result8 = a > b; // false ❌
+		System.out.println("result8: " + !result8); // !false => true ✅
+	}
+}
+
+✅ Java Logical Operators – Important Interview Points
+🔹 AND (&&)
+
+    Short-circuits if first condition is false.
+
+    Use when both conditions must be true.
+
+    E.g., Login: usernameCorrect && passwordCorrect
+
+🔹 OR (||)
+
+    Short-circuits if first condition is true.
+
+    Use when any one condition should be true.
+
+    E.g., Discounts: isStudent || isSeniorCitizen
+
+🔹 NOT (!)
+
+    Flips the boolean value.
+
+    Use for negation or reverse logic.
+
+    E.g., !isLoggedIn means user is not logged in.
