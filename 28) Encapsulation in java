@@ -1,0 +1,184 @@
+// 🔶 Java Encapsulation, Getter-Setter, Private Variables Example
+class Human {
+	private int age;      // private data member - not accessible directly
+	private String name;  // private data member - not accessible directly
+
+	public int getAge() {
+		return age;        // returns age
+	}
+	public void SetAge(int a) {
+		age = a;           // sets age
+	}
+
+	public String getName() {
+		return name;       // returns name
+	}
+	public void setName(String n) {
+		name = n;          // sets name
+	}
+}
+
+public class DemoEncapsulation {
+	public static void main(String[] args) {
+		Human obj = new Human();     // Creates object of Human
+		obj.SetAge(30);              // Calls setter to set age to 30
+		obj.setName("Reddy");        // Calls setter to set name to Reddy
+		
+		// Direct access to private fields is not allowed
+		// obj.age = 11;        ❌ Compilation Error
+		// obj.name = "Navin";  ❌ Compilation Error
+
+		System.out.println(obj.getName() + " : " + obj.getAge()); 
+		// ✅ Output: Reddy : 30
+	}
+}
+
+
+📚 Java Interview Theory: Encapsulation, get/set, and private
+Concept	Description
+Encapsulation	Binding variables and methods inside a class. Protects data from outside.
+Private Variables	Only accessible within the class itself.
+Getter Method	Public method to read a private field.
+Setter Method	Public method to modify a private field.
+✅ Why Use Encapsulation?
+
+    Restricts direct access → data is safe
+
+    Improves maintainability
+
+    Allows validation logic in setters
+
+    Helps in debugging and modular coding
+
+🧠 Getter & Setter Naming Convention
+Type	Syntax	Example
+Getter	public Type getX()	getAge()
+Setter	public void setX(Type x)	setAge(25)
+🚀 Interview Questions Quick Recap
+Q. What is encapsulation in Java?
+
+    Wrapping data (variables) and methods into one unit (class) and making data private.
+
+Q. Why use private variables?
+
+    To restrict direct access and protect data.
+
+Q. Can we access private variables outside class?
+
+    No, only through public getter and setter methods.
+
+Q. What is the benefit of using setters?
+
+    You can add logic (e.g., validation) before assigning the value.
+
+Q. Is encapsulation achieved only by private?
+
+    Mostly yes, but full encapsulation needs private fields + public methods.
+
+
+  Encapsulation ka matlab hai:
+"Data (variables) aur uspe kaam karne wale methods (functions) ko ek unit (class) mein bundle karna, aur internal details ko outside world se hide karna."
+🔒 Encapsulation ke 3 Main Principles:
+
+    Data Hiding → Variables ko private banaya jata hai
+
+    Controlled Access → Getters (getX()) aur Setters (setX()) se data access kiya jata hai
+
+    Bundling → Related data aur functions ek class mein rakhe jate hain
+
+
+  # **Encapsulation in Java - Short & Complete Guide** 🚀  
+
+## **1. What is Encapsulation?**  
+✔ **Bundling data (variables) + methods** into a single unit (Class).  
+✔ **Hiding internal details** (data protection).  
+✔ **Achieved using `private` variables + `public` getters/setters**.  
+
+### **Example:**  
+```java
+class BankAccount {
+    private double balance; // Hidden data
+
+    public double getBalance() { // Read access
+        return balance;
+    }
+
+    public void deposit(double amount) { // Controlled write
+        if (amount > 0) balance += amount;
+    }
+}
+```
+
+---
+
+## **2. Key Benefits**  
+✅ **Security** (prevent unauthorized access).  
+✅ **Flexibility** (change internal logic later).  
+✅ **Control** (add validation in setters).  
+
+---
+
+## **3. `new` Keyword**  
+✔ **Creates objects** in heap memory.  
+✔ **Calls constructor** to initialize object.  
+
+### **Example:**  
+```java
+BankAccount acc = new BankAccount(); // Creates encapsulated object
+```
+
+---
+
+## **4. `this` Keyword**  
+✔ **Refers to current object**.  
+✔ **Used to avoid name conflicts** in constructors/setters.  
+
+### **Example:**  
+```java
+public void setBalance(double balance) {
+    this.balance = balance; // this.balance = instance variable
+}
+```
+
+---
+
+## **5. Interview Questions** ❓  
+
+### **Q1: Why use private variables?**  
+✅ To prevent direct external access (data hiding).  
+
+### **Q2: Difference between encapsulation and abstraction?**  
+- **Encapsulation** = Data hiding + bundling  
+- **Abstraction** = Showing only essential features  
+
+### **Q3: Can we access private members outside class?**  
+❌ No, except via public getters/setters.  
+
+### **Q4: How to achieve 100% encapsulation?**  
+✅ Make all variables `private` and provide controlled access methods.  
+
+### **Q5: Real-world example of encapsulation?**  
+✅ **Medicine capsule** (hides internal chemicals)  
+✅ **ATM machine** (hides cash handling logic)  
+
+---
+
+## **6. Pro Tips** 💡  
+✔ **Always keep fields `private`**.  
+✔ **Use getters/setters for controlled access**.  
+✔ **Add validation in setters** (e.g., `if(amount > 0)`).  
+
+---
+
+## **Cheat Sheet** 📝  
+
+| Concept          | Encapsulation Example              |  
+|------------------|------------------------------------|  
+| **Data Hiding**  | `private double balance;`          |  
+| **Getter**       | `public double getBalance()`       |  
+| **Setter**       | `public void setBalance(double b)` |  
+| **Constructor**  | `public BankAccount(double b)`     |  
+
+**Encapsulation = Data Protection + Controlled Access**  
+
+**Ye 5 points yaad rakh, encapsulation ka badshah ban jaega!** 👑🔥
