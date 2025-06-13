@@ -1,0 +1,211 @@
+// 🔶 Java Static Variable & Static Method Concept with Output
+class Mobile {
+	String brand;        // instance variable
+	int price;           // instance variable
+	String network;      // instance variable (unused)
+	static String name;  // static variable - shared by all objects
+
+	public void show() {
+		System.out.println(brand + " : " + price + " : " + name); // instance method
+	}
+
+	public static void show1(Mobile obj) // static method
+	{
+		// Static methods can't access instance vars directly, need object
+		System.out.println(obj.brand + " : " + obj.price + " : " + obj.name);
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) 
+	{
+		Mobile obj1 = new Mobile();
+		obj1.brand = "Apple";
+		obj1.price = 1500;
+		Mobile.name = "SmartPhone";
+
+		Mobile obj2 = new Mobile();
+		obj2.brand = "Samsung";
+		obj2.price = 1700;
+		Mobile.name = "SmartPhone"; // shared static field
+
+		Mobile.name = "SmartPhone"; // redundant but valid
+
+		obj1.show();   // Output: Apple : 1500 : SmartPhone
+		obj2.show();   // Output: Samsung : 1700 : SmartPhone
+		Mobile.show1(obj1); // Output: Apple : 1500 : SmartPhone
+	}
+}
+
+/*
+🔷 OUTPUT:
+Apple : 1500 : SmartPhone
+Samsung : 1700 : SmartPhone
+Apple : 1500 : SmartPhone
+
+
+🔷 STATIC METHOD THEORY FOR INTERVIEW
+-------------------------------------------------
+1. Belongs to class, not instance.
+2. Can be called without creating object.
+   → `ClassName.methodName()`
+3. Cannot access non-static (instance) variables/methods directly.
+   → Must pass object as parameter if needed.
+4. Used for utility functions, common operations.
+
+✅ Example: Math.max(10, 20);
+✅ `main()` method is static so JVM can call it without creating object.
+
+
+🔷 `new` Keyword:
+- Used to allocate memory and create object.
+- Syntax: `ClassName obj = new ClassName();`
+
+🔷 `this` Keyword:
+- Refers to current object.
+- Resolves conflict between local & instance variable.
+- Used to call current object's method or constructor.
+
+🔷 Difference: `this` vs `static`
+| Feature       | this             | static               |
+|---------------|------------------|-----------------------|
+| Belongs to    | current object   | class itself          |
+| Usage         | inside instance  | inside static methods |
+| Access        | instance members | only static members   |
+
+🔷 Summary:
+- Use `static` for shared methods/variables.
+- Use `this` when referring to instance of class.
+- `new` is for creating objects.
+- Static methods cannot access non-static members directly.
+*/
+
+# **Static Methods in Java - Short & Complete Guide** 🚀  
+
+## **1. Static Method Basics**  
+✔ **Belongs to class**, not objects.  
+✔ **Called without creating object** (`ClassName.method()`).  
+✔ **Can only access static members** (variables/methods).  
+
+### **Example:**  
+```java
+class Calculator {
+    static int add(int a, int b) {  // Static method
+        return a + b;
+    }
+}
+```
+```java
+int sum = Calculator.add(5, 3); // No object needed!
+```
+
+---
+
+## **2. Key Rules of Static Methods**  
+❌ **Cannot use `this`** (no current object).  
+❌ **Cannot access instance variables/methods**.  
+✔ **Can access other static members**.  
+
+### **Example:**  
+```java
+class Mobile {
+    String brand; // Instance variable
+    static String os; // Static variable
+    
+    static void printOS() {
+        System.out.println(os); // ✅ Works (static)
+        // System.out.println(brand); ❌ Error (non-static)
+    }
+}
+```
+
+---
+
+## **3. `new` Keyword (Object Creation)**  
+✔ **Allocates memory** in Heap.  
+✔ **Calls constructor** to initialize object.  
+
+### **Example:**  
+```java
+Mobile m1 = new Mobile(); // Creates object
+```
+
+---
+
+## **4. `this` Keyword (Current Object Reference)**  
+✔ **Refers to current instance**.  
+✔ **Used to:**  
+   - Differentiate **instance vars** from parameters.  
+   - Call one constructor from another (`this()`).  
+
+### **Example:**  
+```java
+class Mobile {
+    String brand;
+    
+    Mobile(String brand) {
+        this.brand = brand; // Refers to instance variable
+    }
+}
+```
+
+---
+
+## **5. When to Use Static Methods?**  
+✔ **Utility functions** (e.g., `Math.sqrt()`).  
+✔ **Factory methods** (create & return objects).  
+✔ **Main method** (`public static void main`).  
+
+### **Example (Factory Method):**  
+```java
+static Mobile createMobile(String brand) {
+    Mobile m = new Mobile();
+    m.brand = brand;
+    return m;
+}
+```
+
+---
+
+## **6. Interview Questions** ❓  
+
+### **Q1: Can static methods be overridden?**  
+❌ **No!** They are **class-level**, not object-level.  
+
+### **Q2: Why is `main()` method static?**  
+✅ Because JVM calls it **without creating any object**.  
+
+### **Q3: Can static methods access instance variables?**  
+❌ **No!** They can only access **static members**.  
+
+### **Q4: Can we use `this` in static methods?**  
+❌ **No!** `this` refers to current **object**, but static methods belong to **class**.  
+
+### **Q5: Difference between static and instance methods?**  
+| Feature          | Static Method               | Instance Method             |  
+|------------------|-----------------------------|-----------------------------|  
+| **Belongs to**   | Class                       | Object                      |  
+| **Access**       | Only static members         | All members                 |  
+| **Calling**      | `ClassName.method()`        | `object.method()`           |  
+
+---
+
+## **7. Pro Tips** 💡  
+✔ **Use for common functionalities** (e.g., logging).  
+✔ **Avoid overusing** (breaks OOP principles).  
+✔ **Prefer instance methods** for object-specific logic.  
+
+---
+
+## **Cheat Sheet** 📝  
+
+| Concept          | Static Method                     | Instance Method                  |  
+|------------------|-----------------------------------|-----------------------------------|  
+| **Syntax**       | `static returnType method()`      | `returnType method()`            |  
+| **Memory**       | Class area                        | Heap (with object)               |  
+| **Access**       | Only static members               | All members                      |  
+| **Calling**      | `ClassName.method()`              | `object.method()`                |  
+
+**Static = Class-Level | Non-Static = Object-Level**  
+
+**Ye 5 points yaad rakh, static methods ka king ban jaega!** 👑🔥
