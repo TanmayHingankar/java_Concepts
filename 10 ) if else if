@@ -1,0 +1,34 @@
+public class ConditionalLogic {
+    public static void main(String[] args) {
+        // Example 1: Basic if-else (commented out)
+        /*
+        int x=8, y=7, z=8;
+        if(x>y && x>z)  // false (x=8 > z=8? No)
+        {
+            System.out.println(x); // Not executed
+        }
+        else
+            System.out.println(y); // Output: 7
+        */
+
+        // Example 2: if-else ladder (commented out)
+        /*
+        int x=8, y=7, z=9;
+        if(x>y && x>z)         // false (x=8 > z=9? No)
+            System.out.println(x);
+        else if(y>x && y>z)    // false (y=7 > z=9? No)
+            System.out.println(y);
+        else
+            System.out.println(z); // Output: 9
+        */
+
+        // Example 3: Optimized condition check
+        int x=8, y=7, z=9;
+        if(x>y && x>z)         // false (x=8 > z=9? No)
+            System.out.println(x);
+        else if(y>z)           // false (y=7 > z=9? No)
+            System.out.println(y);
+        else
+            System.out.println(z); // Output: 9 (since both conditions failed)
+    }
+}
