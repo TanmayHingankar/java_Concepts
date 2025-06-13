@@ -1,0 +1,235 @@
+// 🔶 Java: Constructor Default Values + Setter/Getter Example
+
+class Human {
+	private int age;       // private variable for age
+	private String name;   // private variable for name
+
+	public Human() {
+		age = 12;                 // Default age
+		name = "John";            // Default name
+		// System.out.println("in constructor"); // (optional debug print)
+	}
+
+	public int getAge() {
+		return age;              // Getter for age
+	}
+
+	public void SetAge(int age) {
+		this.age = age;          // Setter using 'this'
+	}
+
+	public String getName() {
+		return name;             // Getter for name
+	}
+
+	public void setName(String name) {
+		this.name = name;        // Setter using 'this'
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) throws ClassNotFoundException {
+
+		Human obj = new Human();             // constructor → name = John, age = 12
+		Human obj1 = new Human();            // another object → name = John, age = 12
+
+		System.out.println(obj.getName() + " : " + obj.getAge());  
+		// 🔸 Output: John : 12
+
+		obj.SetAge(30);                      // changes age to 30 for obj
+		obj.setName("Reddy");               // changes name to "Reddy" for obj
+
+		// System.out.println(obj.getName() + " : " + obj.getAge());
+		// 🔸 Output if uncommented: Reddy : 30
+	}
+}
+
+
+📘 Interview Concepts: Covered Topics
+🔹 1. Constructor:
+
+    Automatically runs when object is created.
+
+    Used to assign default values to object variables.
+
+    No return type, same name as class.
+
+public Human() {
+    age = 12;
+    name = "John";
+}
+
+🔹 2. Encapsulation:
+
+    Wrapping data and logic inside a class.
+
+    Variables are private (not accessible directly).
+
+    Access through public getter/setter methods.
+
+🔹 3. this Keyword:
+
+    Refers to current object inside the class.
+
+    Used when local variable name matches instance variable.
+
+this.age = age;
+this.name = name;
+
+🔹 4. Object References:
+
+    Each object has its own memory.
+
+    obj and obj1 are two different instances with same default values.
+
+    Changing one does not affect the other.
+
+🔹 5. Getter & Setter Table:
+Feature	Getter	Setter
+Purpose	Returns private variable	Sets/updates private variable
+Syntax	getX()	setX(value)
+Example	getAge() → returns age	setAge(30) → updates age
+✅ Final Notes for Your Revision:
+Concept	Points
+Constructor	Called automatically on new keyword. Used to assign default values.
+Encapsulation	Keep variables private. Access through getters/setters.
+this keyword	Refers to current object. Avoids confusion between local/global vars.
+Object independence	obj1 and obj2 are different. Changes in one don't affect the other.
+Output behavior	Constructor sets John : 12, but can be changed using setters.
+
+
+Interviewer may ask:
+
+    What will be the output if you don’t use this.name = name;?
+    ✅ Answer: It will not update the instance variable; it will only modify the local variable (no effect on object).
+
+Or they can ask:
+
+    What's the benefit of constructor vs setter?
+    ✅ Answer:
+
+    Constructor: used for setting initial state
+
+    Setters: used to modify state after object is created
+
+
+# **Constructors in Java - Complete Guide** 🏗️
+
+## **Definition**  
+**Constructor** ek special method hai jo:
+- Object create hone par automatically call hota hai
+- Object initialization ke liye use hota hai
+- Ka naam class ke naam jaisa hota hai
+- Return type nahi hota
+
+## **3 Types of Constructors**
+
+### 1. **Default Constructor** (Compiler-provided)
+```java
+class Car {
+    // No constructor defined
+}
+
+// Usage:
+Car c = new Car(); // Default constructor called
+```
+
+### 2. **No-Arg Constructor** (User-defined)
+```java
+class Bike {
+    Bike() {
+        System.out.println("Bike created!");
+    }
+}
+
+// Usage:
+Bike b = new Bike(); // Prints "Bike created!"
+```
+
+### 3. **Parameterized Constructor**
+```java
+class Student {
+    String name;
+    
+    Student(String n) {
+        name = n; // Initialize with parameter
+    }
+}
+
+// Usage:
+Student s = new Student("Rahul");
+```
+
+## **Key Concepts**
+
+### **`new` Keyword**  
+- Heap memory allocate karta hai
+- Constructor ko call karta hai
+```java
+Student s = new Student(); // new + constructor call
+```
+
+### **`this()` Constructor Chaining**  
+Ek constructor se dusre ko call karna:
+```java
+class Demo {
+    Demo() {
+        this(10); // Calls parameterized constructor
+        System.out.println("Default");
+    }
+    
+    Demo(int x) {
+        System.out.println(x);
+    }
+}
+```
+
+### **Constructor Overloading**  
+Multiple constructors with different parameters:
+```java
+class Rectangle {
+    Rectangle() { } // No-arg
+    Rectangle(int l) { } // One param
+    Rectangle(int l, int b) { } // Two params
+}
+```
+
+## **Interview Q&A** ❓
+
+### Q1: Constructor vs Method?
+| Constructor | Method |
+|-------------|--------|
+| No return type | Return type required |
+| Auto-called on `new` | Manually called |
+| Name = Class name | Any valid name |
+
+### Q2: Can constructors be private?
+✅ **Haan!** Singleton pattern mein use hota hai:
+```java
+class Singleton {
+    private Singleton() { }
+}
+```
+
+### Q3: Can constructors be inherited?
+❌ **Nahi!** Child class ko apna constructor banana padta hai
+
+### Q4: What is constructor chaining?
+✅ Ek constructor se dusre constructor ko call karna (`this()` ya `super()` se)
+
+## **Pro Tips** 💡
+✔ **Always initialize objects properly** via constructors  
+✔ **Use constructor overloading** for flexible object creation  
+✔ **`this()` must be first statement** in constructor  
+
+## **Memory Diagram** 🧠
+```
+[ Stack ]           [ Heap ]
+main()
+└── Car c = [ref] → Car Object
+                └── (initialized by constructor)
+```
+
+**"Constructor = Object ka Birth Certificate"** 🎂
+
+Ye 5 points yaad rakho, constructors par koi bhi question nahi hara paoge! 💪🔥
