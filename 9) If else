@@ -1,0 +1,48 @@
+public class hello {
+
+	public static void main(String[] args) {
+
+		// Block 1: Simple print
+		int x1 = 8;
+		System.out.println("Hello"); // Hello
+		System.out.println("Bye");   // Bye
+
+		// Block 2: if condition true
+		int x2 = 18;
+		if (x2 > 10) {
+			System.out.println("Hello"); // Hello
+		}
+
+		// Block 3: if with true condition directly
+		if (true) {
+			System.out.println("Hello"); // Hello
+		}
+
+		// Block 4: if with && condition - false
+		int x3 = 28;
+		if (x3 > 10 && x3 <= 20) {       // false (x3 = 28)
+			System.out.println("Hello");
+		}
+		System.out.println("Bye");       // Bye
+
+		// Block 5: if-else with && condition
+		int x4 = 28;
+		if (x4 > 10 && x4 <= 20) {       // false (x4 = 28)
+			System.out.println("Hello");
+		} else {
+			System.out.println("Bye");   // Bye
+		}
+
+		// Block 6: if-else with comparison
+		int x = 8;
+		int y = 7;
+		if (x > y) {
+			System.out.println(x);       // 8
+			System.out.println("Thankyou"); // Thankyou
+		} else {
+			System.out.println(y);
+		}
+	}
+}
+
+
