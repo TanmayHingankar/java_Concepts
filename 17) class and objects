@@ -1,0 +1,103 @@
+// Class definition
+class Calculator {
+	// Method for addition
+	public int add(int n1, int n2) {
+		// Step 1: Add the two numbers
+		int r = n1 + n2;           // r = 4 + 5 = 9
+		return r;                  // returns 9
+	}
+}
+
+class Demo {
+	public static void main(String[] args) {
+		int num1 = 4;              // num1 = 4
+		int num2 = 5;              // num2 = 5
+
+		// Creating object of Calculator class
+		Calculator calc = new Calculator(); // Object created
+
+		// Calling 'add' method using the object with arguments 4,5
+		int result = calc.add(4, 5);   // result = 9
+		System.out.println(result);    // Output: 9 ✅
+	}
+}
+
+
+✅ Interview Theory: Object-Oriented Programming (OOPs) in Java
+
+Object-Oriented Programming is a programming paradigm based on "objects", which bundle data (fields) and methods (functions) together.
+🔹 1. Class
+
+    Blueprint of an object
+
+class Car {
+   int wheels = 4; // field/property
+   void drive() {  // method/behavior
+      System.out.println("Driving...");
+   }
+}
+
+🔹 2. Object
+
+    Instance of a class
+
+Car c = new Car(); // Object of Car
+
+
+
+Real life example of oops 
+
+class Mobile {
+    // Properties (attributes/state)
+    String brand;  // Stores the mobile's brand name (e.g., "Apple", "Samsung")
+    String model;  // Stores the model name (e.g., "iPhone 15", "Galaxy S23")
+    double price;  // Stores the price in rupees/dollars
+    
+    // Behaviors (methods/actions)
+    void call() {
+        System.out.println("Calling from " + brand + " " + model + "...");
+    }
+    
+    void message(String recipient) {
+        System.out.println("Sending message to " + recipient + " from " + brand);
+    }
+    
+    void displayInfo() {
+        System.out.println(brand + " " + model + " - ₹" + price);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating objects (instances) of Mobile class
+        Mobile iphone = new Mobile();
+        iphone.brand = "Apple";
+        iphone.model = "iPhone 15";
+        iphone.price = 79900.00;
+        
+        Mobile samsung = new Mobile();
+        samsung.brand = "Samsung";
+        samsung.model = "Galaxy S23";
+        samsung.price = 74999.00;
+        
+        // Using object behaviors
+        iphone.call();      // Output: Calling from Apple iPhone 15...
+        samsung.message("Mom"); // Output: Sending message to Mom from Samsung
+        
+        iphone.displayInfo();  // Output: Apple iPhone 15 - ₹79900.0
+        samsung.displayInfo(); // Output: Samsung Galaxy S23 - ₹74999.0
+    }
+}
+
+
+
+Four Pillars of OOPs
+Pillar	Meaning & Example
+✅ Encapsulation	Wrapping data + methods into a single unit (class).
+private fields + public getters/setters.
+✅ Abstraction	Hiding internal logic and showing only the functionality.
+e.g. You use .add() but don't see how addition is implemented.
+✅ Inheritance	One class inherits properties/methods of another class.
+class Child extends Parent
+✅ Polymorphism	One name, many forms.
+Method Overloading (compile-time), Overriding (runtime).
