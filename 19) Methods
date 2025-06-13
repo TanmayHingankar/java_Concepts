@@ -1,0 +1,171 @@
+// ✅ Class Computer demonstrating object behavior
+class Computer {
+    
+    // Method 1: Play music
+    public void playMusic() {
+        System.out.println("Music Playing..."); // ✅ Output: Music Playing...
+    }
+
+    // Method 2: Return a pen if cost is >=10
+    public String getMeAPen(int cost) {
+        if (cost >= 10)
+            return "Pen";                      // ✅ If cost is 10 or more → return "Pen"
+        else
+            return "Nothing";                  // Else → return "Nothing"
+    }
+}
+
+// ✅ Main class with main method (Execution starts from here)
+public class Demo {
+
+    public static void main(String[] args) {
+        
+        // Creating an object of Computer class
+        Computer obj = new Computer();          // Object created in heap
+
+        obj.playMusic();                        // Calls playMusic() → Output: Music Playing...
+
+        String src = obj.getMeAPen(10);         // Calls getMeAPen(10) → cost = 10 → returns "Pen"
+        System.out.println(src);                // ✅ Output: Pen
+    }
+}
+
+
+📘 INTERVIEW THEORY & CONCEPTS – Full Notes Style
+🔹 1. Class
+
+    Blueprint/Template to create objects.
+
+class Computer {
+    // fields + methods
+}
+
+🔹 2. Object
+
+    Real-world instance of a class.
+
+Computer obj = new Computer();
+
+🔸 Stored in Heap Memory
+🔸 obj is reference variable (in Stack) pointing to object
+🔹 3. Method
+
+    Block of code that performs a specific task.
+
+Syntax:
+
+return_type methodName(parameters) {
+    // code
+    return value; // if return_type is not void
+}
+
+🔸 void → no return
+🔸 String → must return string
+🔹 4. Method Calling using Object
+
+obj.playMusic();         // void method → just performs task
+String val = obj.getMeAPen(10);  // returns "Pen"
+
+🔹 5. Return Statement
+
+    Immediately exits from the method and returns a value.
+
+return "Pen"; // method returns a string
+
+🔹 6. Control Flow (If-Else)
+
+if (cost >= 10)
+    return "Pen";
+else
+    return "Nothing";
+
+✅ MEMORY ALLOCATION IN JAVA:
+Type	Location
+Objects	Heap
+Local vars	Stack
+Class info	Method Area
+
+✅ INTERVIEW QUESTIONS:
+Question	Best Answer
+What is a class?	A class is a blueprint/template from which objects are created.
+What is an object?	An object is an instance of a class with real memory allocated.
+What is a method?	A method is a block of code that performs a specific task.
+What is return type in method?	It defines the data type the method will return.
+Difference between void and return method?	void doesn't return anything. Return method sends a value back.
+
+✅ Real Life Analogy:
+Java Concept	Real Life
+Class	Car Design
+Object	Real Car
+Method	Features like start(), drive()
+Return Method	ATM that gives you money (value)
+Void Method	Washing Machine (does task but gives nothing back)
+
+Class → Blueprint
+Object → Instance of Class
+Method → Action block
+Return → Sends back value
+Void → Does not return
+Object.method() → Method Call
+Heap → Object memory
+Stack → Local variable memory
+
+    Four Pillars of OOP:
+
+        Encapsulation (Data hiding)
+
+        Abstraction (Hiding complexity)
+
+        Inheritance (IS-A relationship)
+
+        Polymorphism (Many forms)
+
+    Method Signature:
+
+        Combination of method name + parameters
+
+        Example: getMeAPen(int) is the signature
+
+    Return Types:
+
+        Can be primitive (int), object (String), or void
+
+        Must match declared type
+
+    Variable Scope:
+
+        Instance variables (class level)
+
+        Local variables (method level)
+
+        Parameters (method input)
+
+    Object Creation:
+
+        new keyword allocates memory
+
+        Constructor initializes object state
+
+    Memory Allocation:
+
+        Stack (method calls, local variables)
+
+        Heap (objects and instance variables)
+
+        Practical Applications:
+
+    Modeling Real-World Entities:
+
+        Like the Computer class represents actual computers
+
+    Building Modular Code:
+
+        Methods divide functionality into logical units
+
+    Data Protection:
+
+        Encapsulation prevents unauthorized access
+
+    Code Reusability:
+
+        Create multiple Computer objects with different states
