@@ -1,0 +1,67 @@
+public class hello {
+
+	public static void main(String[] args) {
+		int x = 6;
+		int y = 5;
+
+//		boolean result = x < y;   // false
+//		boolean result = x > y;   // true
+//		boolean result = x >= y;  // true
+//		boolean result = x <= y;  // false
+//		boolean result = x != y;  // true
+		boolean result = x == y;   // false
+
+		System.out.println(result); // Output: false
+
+		double a = 8.8;
+		double b = 9.8;
+
+//		boolean res = a <= b;     // true
+		boolean res = a >= b;     // false
+
+		System.out.println(res); // Output: false
+	}
+}
+
+List of Relational Operators
+Operator	Meaning	Example	Output
+==	Equal to	6 == 5	false
+!=	Not equal to	6 != 5	true
+>	Greater than	6 > 5	true
+<	Less than	6 < 5	false
+>=	Greater than or equal to	6 >= 5	true
+<=	Less than or equal to	6 <= 5	false
+
+🧠 Note: Comparison is valid for:
+
+    Integers (int, byte, short, long)
+
+    Floating point numbers (float, double)
+
+    Characters (char)
+
+    Objects (only with == or .equals())
+
+
+    ❓ Interview Questions
+
+    Q: What's the difference between == and .equals() in Java?
+
+        A: == compares references (memory addresses), .equals() compares content (for objects like String).
+
+    Q: Will 8.8 == 8.80 return true?
+
+        A: Yes, because both are equal in value (double).
+
+    Q: Can we compare char with int?
+
+        A: Yes. char is internally stored as a numeric (ASCII) value.
+
+System.out.println('A' == 65);  // true
+
+Q: What will this print?
+
+int a = 10, b = 20;
+System.out.println((a + 5) < b); // ?
+
+    A: true → 15 < 20
