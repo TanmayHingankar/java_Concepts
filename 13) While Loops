@@ -1,0 +1,89 @@
+public class hello {
+
+    public static void main(String[] args) {
+        int i=1;
+        
+        // Infinite loop (commented out to prevent actual infinite execution)
+        // while(true)
+        // {
+        //     System.out.println("Hi"+ i);  // Output: Hi1, Hi2, Hi3, ... (infinite)
+        //     i++;
+        // }
+        
+        
+        // Simple while loop
+        // while(i<=4)
+        // {
+        //     System.out.println("Hi"+ i);  // Output: Hi1, Hi2, Hi3, Hi4
+        //     i++;
+        // }
+        // System.out.println("Bye"+i);  // Output: Bye5
+
+        
+        // Nested while loop
+        while(i<=4)  // Outer loop runs 4 times
+        {
+            System.out.println("Hi"+ i);  
+            // Output: 
+            // Hi1
+            // Hi2
+            // Hi3
+            // Hi4
+            
+            int j=1;
+            while(j<=3) {  // Inner loop runs 3 times for each outer iteration
+                System.out.println("Hello"+j);  
+                // Output for each outer iteration:
+                // Hello1
+                // Hello2
+                // Hello3
+                j++;
+            }
+            i++;
+        }
+        System.out.println("Bye"+i);  // Output: Bye5
+    }
+}
+
+Important Concepts and Theory for Interviews:
+1. While Loop Basics:
+
+    A while loop repeatedly executes a block of code as long as its condition is true
+
+    Syntax: while(condition) { ... }
+
+    The condition is checked before each iteration
+
+    Must include a way to modify the condition variable to avoid infinite loops
+
+2. Infinite Loops:
+
+    Occurs when the loop condition never becomes false
+
+    Example: while(true) { ... } or while(i > 0) { i++; }
+
+    Sometimes intentionally used (with break statements) but generally should be avoided
+
+3. Loop Control:
+
+    break - exits the loop immediately
+
+    continue - skips the rest of the current iteration
+
+    Can use boolean flags for more complex control
+
+4. Nested Loops:
+
+    A loop inside another loop
+
+    For each iteration of the outer loop, the inner loop completes all its iterations
+
+    Time complexity becomes O(n*m) for simple nested loops
+
+5. Variable Scope in Loops:
+
+    Variables declared inside a loop block are only accessible within that block
+
+    In the example, j is reinitialized in each outer loop iteration
+
+    i is accessible throughout the method as it's declared outside the loops
