@@ -1,0 +1,52 @@
+public class hello {
+
+    public static void main(String[] args) {
+        int i = 1;  // Initialize loop counter
+        
+        do  // Start of do-while loop
+        {
+            System.out.println("Hi"+i);  
+            // Output in each iteration:
+            // Hi1 (when i=1)
+            // Hi2 (when i=2)
+            // Hi3 (when i=3)
+            // Hi4 (when i=4)
+            
+            i++;  // Increment counter: 1→2→3→4→5
+        }
+        while(i<=4);  // Condition check at bottom:
+                      // Continues while i≤4 (stops when i=5)
+    }
+}
+
+Complete Theory & Interview Concepts: Do-While Loop
+1. Basic Structure:
+java
+
+do {
+    // code block
+} while(condition);
+
+2. Key Characteristics:
+
+    Post-test loop: Condition checked AFTER execution
+
+    Guaranteed execution: Runs at least once even if condition is false initially
+
+    Terminating semicolon: Note the ; after while(condition)
+
+3. Execution Flow:
+
+    Execute code block
+
+    Check condition
+
+    If true → repeat from step 1
+
+    If false → exit loop
+
+4. Comparison with While Loop:
+Feature	do-while	while
+Check Time	After first execution	Before first execution
+Min Runs	At least 1	Possibly 0
+Use Case	When you need to run code at least once	When code may not need to run at all
