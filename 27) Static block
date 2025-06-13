@@ -1,0 +1,86 @@
+// 🔶 Java Static Variable, Static Block & Constructor Execution Order with Output
+class Mobile {
+	String brand;        // instance variable
+	int price;           // instance variable
+	String network;      // instance variable (unused)
+	static String name;  // static variable - shared by all objects
+
+	static {
+		name = "Phone";
+		System.out.println("in static block"); // executes once when class is loaded
+	}
+
+	public Mobile() {
+		brand = "";
+		price = 200;
+		System.out.println("in constructor"); // executes when object is created
+	}
+
+	public void show() {
+		System.out.println(brand + " : " + price + " : " + name); // instance method
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) throws ClassNotFoundException
+	{
+		Class.forName("Mobile"); // This will load class and trigger static block only
+
+		// Output at this point:
+		// in static block
+		
+		// If we uncomment below, constructor will execute:
+		// Mobile obj1 = new Mobile();
+		// obj1.brand = "Apple";
+		// obj1.price = 1500;
+		// Mobile.name = "SmartPhone";
+		// obj1.show();
+	}
+}
+
+/*
+🔷 OUTPUT:
+in static block
+
+🔷 Explanation:
+-----------------------------------
+✅ static block:
+- Executes when class is loaded (even before object is created).
+- Used to initialize static variables.
+- Runs only once per class loading.
+
+✅ constructor:
+- Executes every time an object is created using `new`.
+
+✅ `Class.forName("Mobile")`:
+- Dynamically loads the class.
+- Triggers static block, but **does NOT** create object → so constructor not called.
+
+🔷 Order of Execution:
+1️⃣ Static Block → Only once when class is loaded
+2️⃣ Constructor → Every time object created
+3️⃣ Instance Method → When called using object
+
+-----------------------------------
+🔷 Interview Concepts Summary:
+
+📌 static block:
+- Executes before main(), before any object creation.
+- Used for static variable initialization.
+
+📌 constructor:
+- Initializes object state.
+- No return type, same name as class.
+
+📌 Class.forName():
+- Loads the class dynamically.
+- Useful in JDBC & Reflection.
+
+📌 Differences:
+| Feature           | static block             | constructor               |
+|-------------------|---------------------------|----------------------------|
+| When called       | On class loading         | On object creation         |
+| Runs how many     | Once                     | Every object               |
+| Syntax            | static { }               | ClassName() { }            |
+
+*/
