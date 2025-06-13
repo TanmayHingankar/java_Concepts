@@ -1,0 +1,141 @@
+1. Single Dimensional Arrays
+
+public class Demo {
+    public static void main(String[] args) {
+        // Two ways to create arrays:
+        
+        // 1. Literal initialization (commented out)
+        // int nums[] = {3,7,2,4};  // Creates array with 4 elements
+        // nums[1] = 6;             // Changes second element to 6
+        // System.out.println(nums[1]); // Output: 6
+        
+        // 2. Using new keyword (preferred for dynamic sizing)
+        int nums[] = new int[4];  // Creates array of size 4 (all 0 initially)
+        nums[0] = 4;  // Index 0 = 4
+        nums[1] = 8;  // Index 1 = 8
+        nums[2] = 3;  // Index 2 = 3
+        nums[3] = 9;  // Index 3 = 9
+        
+        // Printing individual elements (commented out)
+        // System.out.println(nums[0]); // 4
+        // System.out.println(nums[1]); // 8
+        // System.out.println(nums[2]); // 3
+        // System.out.println(nums[3]); // 9
+        
+        // Better way - using for loop
+        for (int i = 0; i < 4; i++) {
+            System.out.println(nums[i]); 
+            // Output:
+            // 4
+            // 8
+            // 3
+            // 9
+        }
+    }
+}
+
+
+Two Dimensional Arrays
+
+
+public class Demo {
+    public static void main(String[] args) {
+        // Create 3x4 matrix
+        int nums[][] = new int[3][4];  // 3 rows, 4 columns
+        
+        // Fill with random numbers (but has BUG - see fix below)
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 4; j++) {
+                nums[i][j] = (int)(Math.random() * 100);  // Fixed version
+                System.out.print(nums[i][j] + " ");  // Print inline
+            }
+            System.out.println();  // New line after each row
+        }
+        
+        // Print using nested for loops
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 4; j++) {
+                System.out.print(nums[i][j] + " ");
+            }
+            System.out.println();
+        }
+        
+        // Print using enhanced for loops
+        for(int[] row : nums) {      // Get each row (1D array)
+            for(int value : row) {   // Get each value in row
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+Key Concepts for Interviews
+1. Array Fundamentals:
+
+    Fixed Size: Length defined at creation
+
+    Zero-based Indexing: First element at index 0
+
+    Homogeneous: All elements same type
+
+    Memory: Contiguous block in heap
+
+2. Important Properties:
+
+    array.length: Gives array size (not method, field)
+
+    Arrays.toString(): For 1D arrays
+
+    Arrays.deepToString(): For multi-dimensional arrays
+
+3. Multi-dimensional Arrays:
+
+    Actually "arrays of arrays"
+
+    Can be jagged (rows of different lengths)
+
+    Memory layout: Array of references to row arrays
+
+4. Common Interview Questions:
+
+    Q: Difference between array and ArrayList?
+    A: Arrays fixed size, ArrayLists dynamic; Arrays primitive/Object, ArrayList only Objects
+
+    Q: How to copy an array?
+    A: System.arraycopy(), Arrays.copyOf(), or clone()
+
+    Q: What's a jagged array?
+    A: 2D array where rows have different lengths
+
+    Q: Why arrays start with index 0?
+    A: Because array name points to memory address, and index is offset from that address
+
+5. Performance Aspects:
+
+    Access Time: O(1) for any element
+
+    Memory Overhead: Small (just header + elements)
+
+    Cache Friendly: Contiguous memory helps CPU caching
+
+Memory Representation
+1D Array:
+text
+
+Stack               Heap
+┌──────┐           ┌───────────┐
+| nums | ────────► | [0] | [1] |
+└──────┘           |  4  |  8  |
+                   └───────────┘
+
+2D Array:
+text
+
+Stack               Heap              Heap
+┌──────┐           ┌─────┐          ┌───┬───┬───┐
+| nums | ────────► | [0] | ───────► | 1 | 2 | 3 |
+└──────┘           ├─────┤          └───┴───┴───┘
+                   | [1] | ───┐     ┌───┬───┬───┐
+                   └─────┘    └───► | 4 | 5 | 6 |
+                                    └───┴───┴───┘
