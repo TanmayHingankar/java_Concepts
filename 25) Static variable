@@ -1,0 +1,240 @@
+// 🔶 Java Static Variable Concept with Output
+class Mobile {
+	String brand;        // instance variable
+	int price;           // instance variable
+	String network;      // instance variable (unused)
+	static String name;  // static variable - shared by all objects
+
+	public void show() {
+		System.out.println(brand + " : " + price + " : " + name);
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) 
+	{
+		Mobile obj1 = new Mobile();
+		obj1.brand = "Apple";
+		obj1.price = 1500;
+		Mobile.name = "SmartPhone";      // static variable set at class level
+
+		Mobile obj2 = new Mobile();
+		obj2.brand = "Samsung";
+		obj2.price = 1700;
+		Mobile.name = "SmartPhone";      // again setting same static value
+
+		Mobile.name = "SmartPhone";      // redundant, value already set
+
+		obj1.show(); // Output: Apple : 1500 : SmartPhone
+		obj2.show(); // Output: Samsung : 1700 : SmartPhone
+	}
+}
+
+/*
+🔷 OUTPUT:
+Apple : 1500 : SmartPhone
+Samsung : 1700 : SmartPhone
+
+
+🔷 STATIC VARIABLE CONCEPTS
+-------------------------------------------------
+1. `static` variable belongs to **class**, not instance.
+2. Shared among all objects of that class.
+3. Can be accessed using class name: `ClassName.varName`.
+4. Memory allocated only **once** at class loading.
+5. Best used for **common properties** shared by all objects.
+
+🔷 STATIC vs INSTANCE VARIABLES
+-------------------------------------------------
+| Feature               | Static Variable      | Instance Variable     |
+|-----------------------|----------------------|------------------------|
+| Belongs To            | Class                | Object (instance)     |
+| Memory Allocation     | Once per class       | Every time per object |
+| Access                | ClassName.var        | object.var            |
+| Sharing               | Shared among objects | Separate for each     |
+| Example               | Mobile.name          | obj.brand             |
+
+🔷 Use Cases of `static`:
+- Constants (e.g. `PI` in `Math.PI`)
+- Counters shared across objects
+- Utility methods (`Math.max()`, etc.)
+- Shared configuration fields
+
+🔷 Accessing:
+- Correct: `Mobile.name = "Phone";`
+- Also valid: `obj1.name`, but not preferred
+
+*/
+
+
+Core Concepts: Static Variables
+1. What is a Static Variable?
+
+    Shared across all objects of the class.
+
+    Stored in class memory (not in individual objects).
+
+    Accessed via class name (Mobile.name).
+
+2. When to Use Static?
+
+✔ Common properties (e.g., companyName, discountRate).
+✔ Constants (static final PI = 3.14).
+✔ Utility methods (Math.sqrt()).
+3. Key Differences: Static vs Instance Variables
+Feature	Static Variable	Instance Variable
+Memory	Class area (1 copy)	Heap (per-object copy)
+Access	ClassName.variable	object.variable
+Lifetime	Until program ends	Until object is garbage collected
+Usage	Shared data	Object-specific data
+4. Common Interview Questions
+Q1: Can we access static variables using objects?
+
+✅ Ans: Yes, but not recommended (use ClassName.variable).
+Q2: Can static methods access instance variables?
+
+❌ Ans: No! Static methods can only access static members.
+Q3: Where is a static variable stored in memory?
+
+✅ Ans: Class/Method Area (a special memory area in JVM).
+Q4: Can we override static methods?
+
+❌ Ans: No! Method overriding works for instance methods only.
+Q5: What is a static block?
+
+✅ Ans: A block that runs once when class is loaded.
+java
+
+static { 
+    System.out.println("Class loaded!"); 
+}
+
+
+# **Static Variables & Key Java Concepts - Short & Complete Guide** 🚀  
+
+## **1. Static Variables (Class-Level Variables)**  
+✔ **Shared across all objects** of the class.  
+✔ **Stored in class memory** (not in heap).  
+✔ **Accessed via class name** (`ClassName.staticVar`).  
+
+### **Example:**  
+```java
+class Mobile {
+    String brand;       // Instance variable (per-object)
+    static String os;   // Static variable (shared)
+}
+```
+```java
+Mobile.os = "Android"; // Set static variable (no object needed)
+```
+
+---
+
+## **2. `new` Keyword**  
+✔ **Allocates memory** for objects in **Heap**.  
+✔ **Calls constructor** to initialize object.  
+
+### **Example:**  
+```java
+Mobile m1 = new Mobile(); // Creates object in heap
+```
+
+---
+
+## **3. `this` Keyword**  
+✔ **Refers to current object** (instance).  
+✔ **Used to:**  
+   - Differentiate **instance variables** from parameters.  
+   - Call one constructor from another (`this()`).  
+
+### **Example:**  
+```java
+class Mobile {
+    String brand;
+    
+    Mobile(String brand) {
+        this.brand = brand; // Refers to instance variable
+    }
+}
+```
+
+---
+
+## **4. Static Methods**  
+✔ **Belongs to class**, not objects.  
+✔ **Can only access static members** (variables/methods).  
+
+### **Example:**  
+```java
+static void printOS() {
+    System.out.println(os); // Only static variables allowed
+}
+```
+
+---
+
+## **5. Static Block**  
+✔ **Runs once when class loads**.  
+✔ **Used for static initialization**.  
+
+### **Example:**  
+```java
+static {
+    System.out.println("Class loaded!");
+}
+```
+
+---
+
+## **6. Key Differences**  
+
+| Feature          | Static                        | Non-Static (Instance)        |
+|------------------|-------------------------------|-------------------------------|
+| **Memory**       | Class area                    | Heap (per object)             |
+| **Access**       | `ClassName.member`            | `object.member`               |
+| **Lifetime**     | Until program ends            | Until object is garbage collected |
+| **Overriding**   | ❌ No                         | ✅ Yes                        |
+
+---
+
+## **7. Interview Questions** ❓  
+
+### **Q1: Can static methods access instance variables?**  
+❌ **No!** They can only access **static members**.  
+
+### **Q2: Can we use `this` in static methods?**  
+❌ **No!** `this` refers to current **object**, but static methods belong to **class**.  
+
+### **Q3: Why is `main()` method static?**  
+✅ Because JVM calls it **without creating any object**.  
+
+### **Q4: Can we override static methods?**  
+❌ **No!** Method overriding works only for **instance methods**.  
+
+### **Q5: Where are static variables stored?**  
+✅ **Class/Method Area** (special JVM memory).  
+
+---
+
+## **8. Pro Tips** 💡  
+✔ **Use `static final` for constants:**  
+```java
+static final String COMPANY = "Apple";
+```
+✔ **Avoid too many static variables** (breaks OOP).  
+✔ **Static methods = Utility functions** (e.g., `Math.max()`).  
+
+---
+
+## **Cheat Sheet** 📝  
+
+| Concept          | Syntax                     | Example                     |
+|------------------|----------------------------|-----------------------------|
+| **Static Variable** | `static type var;`       | `static String os;`         |
+| **Static Method**   | `static returnType method()` | `static void printOS()`    |
+| **Static Block**    | `static { ... }`          | Runs at class loading       |
+| **Access Static**   | `ClassName.member`        | `Mobile.os = "Android";`   |
+
+**Static = Shared | Non-Static = Per Object**  
+
+**Ye sab yaad rakh, interview crack kar lega!** 🔥😎
