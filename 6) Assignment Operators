@@ -1,0 +1,110 @@
+public class hello {
+
+	public static void main(String[] args) {
+		
+		// Addition
+/**		
+		int num1 = 7;
+		int num2 = 5;
+		int result = num1 + num2;
+		System.out.println(result); // Output: 12
+**/
+
+		// Subtraction
+/**		
+		int num1 = 7;
+		int num2 = 5;
+		int result = num1 - num2;
+		System.out.println(result); // Output: 2
+**/
+
+		// Multiplication
+/**		
+		int num1 = 7;
+		int num2 = 5;
+		int result = num1 * num2;
+		System.out.println(result); // Output: 35
+**/
+
+		// Division
+/**		
+		int num1 = 7;
+		int num2 = 5;
+		int result = num1 / num2;
+		System.out.println(result); // Output: 1 (because it's integer division)
+**/
+
+		// Modulus
+/**		
+		int num1 = 7;
+		int num2 = 5;
+		int result = num1 % num2;
+		System.out.println(result); // Output: 2
+**/
+
+		// Increment and Decrement
+		int num = 7;
+//		num = num + 2;       // num becomes 9
+//		num += 2;            // num becomes 9 (compound assignment)
+//		num *= 2;            // num becomes 14
+
+		num++;                // post-increment → num becomes 8
+		++num;                // pre-increment → num becomes 9
+		num--;                // post-decrement → num becomes 8
+		--num;                // pre-decrement → num becomes 7
+		System.out.println(num); // Output: 7
+
+		int result = num++;   // result = 7, then num becomes 8
+		System.out.println(result); // Output: 7
+	}
+
+}
+
+Theory for Interview – Java Operators & Concepts
+🔸 1. Arithmetic Operators
+
+Used for basic mathematical operations.
+Operator	Meaning	Example (int a=7, b=5)	Result
++	Addition	a + b	12
+-	Subtraction	a - b	2
+*	Multiplication	a * b	35
+/	Division	a / b	1
+%	Modulus	a % b	2
+
+🧠 Note: Division of integers always gives an integer result (floor value).
+
+
+🔸 2. Assignment Operators
+
+Used to assign values to variables.
+Operator	Description	Example	Result
+=	Assign	a = 5	a = 5
++=	Add and assign	a += 3	a = a+3
+-=	Subtract and assign	a -= 2	a = a-2
+*=	Multiply and assign	a *= 4	a = a*4
+/=	Divide and assign	a /= 2	a = a/2
+%=	Modulus and assign	a %= 2	a = a%2
+
+
+🔸 3. Increment and Decrement Operators
+
+Used to increase or decrease value by 1.
+Operator	Type	Meaning	Example	Effect
+++a	Pre-Increment	Increase first, then use	int b = ++a	a = a+1, then assign
+a++	Post-Increment	Use first, then increase	int b = a++	assign, then a = a+1
+--a	Pre-Decrement	Decrease first, then use	int b = --a	a = a-1, then assign
+a--	Post-Decrement	Use first, then decrease	int b = a--	assign, then a = a-1
+
+ Example:
+
+int x = 5;
+int y = x++; // y = 5, x = 6
+int z = ++x; // x = 7, z = 7
+
+4. Modulus Operator %
+
+    Gives remainder after division.
+
+    7 % 5 = 2
+
+    Often used in even/odd checks, circular arrays, etc.
