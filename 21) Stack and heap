@@ -1,0 +1,141 @@
+class Calculator {
+    int num = 5;  // Instance variable (stored in heap)
+
+    public int add(int n1, int n2) {
+        System.out.println(num);  // Output: 5 (before changing num)
+        return n1 + n2;           // returns 3 + 4 = 7
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        int data = 10; // Local variable (stored in stack, not used here)
+
+        Calculator obj = new Calculator();   // New object obj created
+        Calculator obj1 = new Calculator();  // Another separate object obj1 created
+
+        int r1 = obj.add(3, 4);  // Output: 5 (num value from obj), r1 = 7
+
+        obj.num = 8;  // Changes obj's num to 8, does not affect obj1
+
+        System.out.println(obj.num);   // Output: 8
+        System.out.println(obj1.num);  // Output: 5 (unchanged)
+    }
+}
+
+
+📘 INTERVIEW THEORY & NOTES: Full Concepts Breakdown
+🔹 1. Instance Variable vs Local Variable
+
+    int num = 5; → Instance variable
+
+        Stored in heap with the object.
+
+        Each object has its own copy.
+
+    int data = 10; → Local variable
+
+        Stored in stack.
+
+        Lifetime limited to the method block.
+
+🔹 2. Memory Allocation
+
+    obj and obj1 point to separate objects in heap.
+
+    Each object has its own num.
+
+obj → [ Calculator object → num = 5 ]
+obj1 → [ Calculator object → num = 5 ]
+
+After obj.num = 8, only obj's num changes:
+
+obj.num = 8
+obj1.num = 5
+
+🔹 3. Method Call & Output Order
+
+    obj.add(3, 4) prints obj.num, i.e., 5
+
+    After that, obj.num is updated to 8
+
+    Printing obj.num → 8
+
+    Printing obj1.num → still 5
+
+🔹 4. Why Does obj1.num Stay 5?
+
+Because obj1 is a separate object, it has its own num which was not modified.
+🔹 5. Concept: Reference Variables
+
+Calculator obj = new Calculator();
+
+    obj is a reference pointing to an object in heap.
+
+    When you write obj.num = 8, you’re modifying the field in that specific object.
+
+🔹 6. Concept: Object-Oriented Behavior
+
+    Objects created using new have independent instance data.
+
+    Changing one object’s data does not affect others unless they share the same reference.
+
+🔹 7. Common Interview Questions From This Code
+
+Question	Answer
+
+What is the output of the program?	5 8 5
+What is the difference between obj and obj1?	Two different objects in memory.
+Why did obj1.num remain unchanged?	Because it’s a separate object with its own num.
+Is num static or instance?	Instance. Each object has its own copy.
+Where is num stored?	In the heap, as part of the object.
+What happens if we make num static?	It becomes shared by all objects.
+
+BONUS TIP: Try Making num Static
+
+Change:
+
+int num = 5;
+
+To:
+
+static int num = 5;
+
+Output becomes:
+
+5
+8
+8
+
+Because now num is shared across obj and obj1.
+
+
+Interview Concepts:
+
+    Memory Allocation:
+
+        Heap: Stores objects and their instance variables
+
+        Stack: Stores method calls and local variables
+
+    Reference Variables:
+
+        obj and obj1 are references to distinct objects
+
+        = operator copies references, not objects
+
+    Default Values:
+
+        Instance variables get default values (0, false, null)
+
+        Local variables must be initialized before use
+
+    Object Lifecycle:
+
+        Created with new
+
+        Eligible for garbage collection when no references exist
+
+
+
+        
