@@ -1,0 +1,196 @@
+// 🔶 Java Encapsulation with `this` keyword, private variables, and getter/setter
+
+class Human {
+	private int age;         // private field: not accessible directly
+	private String name;     // private field: not accessible directly
+
+	public int getAge() {
+		return age;          // returns value of age
+	}
+
+	public void SetAge(int age) {
+		this.age = age;      // 'this.age' refers to the class variable
+		// 'age' (right side) refers to the parameter passed
+	}
+
+	public String getName() {
+		return name;         // returns value of name
+	}
+
+	public void setName(String name) {
+		this.name = name;    // assigns value to class variable using 'this'
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) {
+		Human obj = new Human();     // Creates object of Human
+		obj.SetAge(30);              // Sets age using setter (calls SetAge)
+		obj.setName("Reddy");        // Sets name using setter
+
+		System.out.println(obj.getName() + " : " + obj.getAge());
+		// ✅ Output: Reddy : 30
+	}
+}
+
+
+🎯 Interview Theory & Revision Notes
+🔹 What is Encapsulation?
+
+Encapsulation = Data hiding + controlled access via methods.
+
+    ✅ Makes class fields private
+
+    ✅ Provides public getter/setter methods to access/update
+
+🔹 What is the this keyword?
+Feature	Description
+this	Refers to current object's instance
+Why used?	To resolve naming conflict between local (parameter) and instance variable
+Example	this.age = age; → left = class variable, right = method parameter
+🔹 Getter & Setter Table:
+Purpose	Getter	Setter
+Syntax	public Type getX()	public void setX(Type x)
+Example	public int getAge()	public void setAge(int age)
+Use case	Read private value	Write/update private value
+🧠 Why make fields private?
+Benefit	Explanation
+✅ Data protection	Can't access from outside directly
+✅ Validation control	You can validate values inside setter
+✅ Better maintainability	Easy to change implementation later
+🔹 this vs No this
+Without this	With this
+age = age;	Assigns parameter to itself (no effect)
+this.age = age;	✅ Correct: assigns method parameter to field
+🔹 Possible Interview Questions
+
+    What is encapsulation in Java?
+
+        Encapsulation is a mechanism of wrapping data and code into a single unit and restricting access to certain details of an object.
+
+    Why use this keyword?
+
+        To resolve ambiguity between method parameters and class variables.
+
+    Can we access private fields directly?
+
+        ❌ No. Use getter and setter.
+
+    Why is this used inside constructor or setter?
+
+        To refer to the current object's variable when method parameter has the same name.
+
+    What is the benefit of setter methods?
+
+        We can validate the value before assigning.
+
+
+  # **Getters & Setters - Complete Guide** 🚀  
+
+## **1. Definition (Getters & Setters kya hai?)**  
+✔ **Getters** → Methods jo private variables ka value *return* karte hain (`getVariableName()`)  
+✔ **Setters** → Methods jo private variables ka value *set/modify* karte hain (`setVariableName()`)  
+
+**Example:**  
+```java
+private String name; // Private variable
+
+// Getter
+public String getName() {
+    return name;
+}
+
+// Setter
+public void setName(String name) {
+    this.name = name;
+}
+```
+
+---
+
+## **2. Why Use Getters/Setters? (Kyu Important hai?)**  
+✅ **Encapsulation** → Data hiding + controlled access  
+✅ **Validation** → Invalid values se bachane ke liye (e.g., age < 0)  
+✅ **Flexibility** → Internal implementation change kar sakte hain bina code break kiye  
+
+**Example with Validation:**  
+```java
+private int age;
+
+public void setAge(int age) {
+    if(age > 0 && age < 120) { // Validation
+        this.age = age;
+    } else {
+        System.out.println("Invalid age!");
+    }
+}
+```
+
+---
+
+## **3. `new` Keyword (Object Creation)**  
+✔ **Heap memory mein object create karta hai**  
+✔ **Constructor ko call karta hai**  
+
+**Example:**  
+```java
+Student s1 = new Student(); // 'new' se object banta hai
+```
+
+---
+
+## **4. `this` Keyword (Current Object Reference)**  
+✔ **Current object ke instance variables ko refer karta hai**  
+✔ **Variable name conflicts ko solve karta hai**  
+
+**Example:**  
+```java
+public void setName(String name) {
+    this.name = name; // this.name = instance variable
+}
+```
+
+---
+
+## **5. Interview Questions ❓**  
+
+### **Q1: Can we make getters/setters final?**  
+✅ **Haan!** But child classes override nahi kar payegi  
+
+### **Q2: Why are getters/setters public?**  
+✅ Taaki dusre classes unhe access kar sake  
+
+### **Q3: Can we have getters without setters?**  
+✅ **Haan!** Agar variable read-only banana ho (e.g., `studentId`)  
+
+### **Q4: Difference between direct access vs getters/setters?**  
+| Direct Access | Getters/Setters |  
+|--------------|----------------|  
+| No control | Full control |  
+| No validation | Validation possible |  
+| Breaks encapsulation | Follows encapsulation |  
+
+### **Q5: Real-world example of getters/setters?**  
+✅ **Bank Account** → `balance` private rakho, `getBalance()` se access karo  
+
+---
+
+## **6. Pro Tips 💡**  
+✔ **Always keep variables `private`**  
+✔ **Use `this` in setters** (avoid name conflicts)  
+✔ **Add validation in setters** (e.g., `if(salary > 0)`)  
+
+---
+
+## **Cheat Sheet 📝**  
+
+| Concept | Syntax | Example |  
+|---------|--------|---------|  
+| **Getter** | `public returnType getVar()` | `public String getName()` |  
+| **Setter** | `public void setVar(type var)` | `public void setName(String name)` |  
+| **`new`** | `ClassName obj = new ClassName()` | `Student s = new Student()` |  
+| **`this`** | `this.variable = parameter` | `this.name = name` |  
+
+**"Getters/Setters = Controlled Access to Private Data"**  
+
+Ye sab yaad rakhoge toh interview mein koi bhi getter/setter question nahi chhootega! 🔥💯
