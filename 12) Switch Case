@@ -1,0 +1,101 @@
+public class EnhancedDayOfWeek {
+    public static void main(String[] args) {
+        int dayNumber = 3;
+        
+        // 1. Modern switch expression (returns a value)
+        String day = switch(dayNumber) {
+            case 1 -> "Monday";
+            case 2 -> "Tuesday";
+            case 3 -> "Wednesday";  // This will be selected
+            case 4 -> "Thursday";
+            case 5 -> "Friday";
+            case 6 -> "Saturday";
+            case 7 -> "Sunday";
+            default -> {
+                // Can include complex logic
+                yield "Invalid day (Must be 1-7)";
+            }
+        };
+        System.out.println("Today is: " + day);  // Output: Today is: Wednesday
+
+        // 2. Multiple case labels
+        String dayType = switch(dayNumber) {
+            case 1, 2, 3, 4, 5 -> "Weekday";
+            case 6, 7 -> "Weekend";
+            default -> "Unknown";
+        };
+        System.out.println("Day type: " + dayType);  // Output: Weekday
+    }
+}
+
+
+Comprehensive Theory: Switch Statements
+1. Switch Statement Basics
+Feature	Traditional Switch	Modern Switch (Java 14+)
+Syntax	case x: ... break;	case x -> ... (no break)
+Return Value	No (statements only)	Yes (expressions)
+Default Case	Optional	Optional
+Fall-through	Yes (without break)	No (arrow syntax prevents it)
+2. Key Interview Questions
+Q1. Why use switch over if-else?
+
+    Answer:
+
+        Better readability for multiple fixed values
+
+        JVM optimizes switches using jump tables (faster than if-else for many cases)
+
+Q2. What happens without break in traditional switch?
+
+    Answer: Execution falls through to the next case (often a bug source):
+    java
+
+    case 1:
+        System.out.println("Monday");  // No break → Tuesday also prints!
+    case 2:
+        System.out.println("Tuesday");
+
+Q3. What types work with switch?
+
+    Java 7+: int, char, String, enum
+
+    Java 12+: Also byte, short, wrapper classes
+
+Q4. What's the yield keyword?
+
+    Answer: Used to return values in modern switch blocks:
+    java
+
+    String result = switch(x) {
+        case 1 -> "One";
+        default -> {
+            // Complex logic
+            yield "Many";
+        }
+    };
+
+Q5. How to handle ranges in switch?
+
+    Answer: Use arrow syntax with conditions (Java 17+):
+    java
+
+    String size = switch(score) {
+        case 90-100 -> "A";
+        case 80-89 -> "B";
+        default -> "F";
+    };
+
+
+
+4. Performance Considerations
+
+    Jump Tables: Switches with contiguous values (e.g., 1,2,3...) are optimized to O(1) lookups.
+
+    Hash Lookups: Used for non-contiguous values (e.g., 1, 100, 1000).
+
+Cheat Sheet
+Scenario	Traditional Switch	Modern Switch
+Single Case	case 1: ... break;	case 1 -> ...
+Multiple Cases	Not supported	case 1, 2 -> ...
+Return Value	Not possible	String x = switch() { ... }
+Fall-through	Yes (risky)	No (arrow syntax prevents)
