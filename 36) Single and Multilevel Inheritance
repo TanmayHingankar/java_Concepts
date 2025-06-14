@@ -1,0 +1,230 @@
+# **Types of Inheritance in Java - Complete Guide**  
+
+## **1. Single Inheritance**  
+**Definition**: A child class inherits from **only one parent class**.  
+
+### **Example**  
+```java
+class Parent {
+    void show() {
+        System.out.println("Parent method");
+    }
+}
+
+class Child extends Parent {  // Single inheritance
+    void display() {
+        System.out.println("Child method");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.show();    // Inherited from Parent
+        c.display(); // Own method
+    }
+}
+```
+**Output:**  
+```
+Parent method  
+Child method
+```
+
+### **Key Points**  
+✔ **Simplest form** of inheritance  
+✔ **`extends` keyword** is used  
+✔ Child can **override** parent methods  
+
+---
+
+## **2. Multilevel Inheritance**  
+**Definition**: A child class inherits from a parent, which itself inherits from another class (chain-like structure).  
+
+### **Example**  
+```java
+class Grandparent {
+    void grand() {
+        System.out.println("Grandparent method");
+    }
+}
+
+class Parent extends Grandparent {  // Level 1
+    void parent() {
+        System.out.println("Parent method");
+    }
+}
+
+class Child extends Parent {  // Level 2
+    void child() {
+        System.out.println("Child method");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.grand();  // From Grandparent
+        c.parent(); // From Parent
+        c.child();  // Own method
+    }
+}
+```
+**Output:**  
+```
+Grandparent method  
+Parent method  
+Child method
+```
+
+### **Key Points**  
+✔ **Chain of inheritance** (Grandparent → Parent → Child)  
+✔ **Constructor chaining** (`super()` called at each level)  
+✔ Used in **real-world hierarchies** (e.g., Vehicle → Car → SportsCar)  
+
+---
+
+## **3. Multiple Inheritance (Not Supported in Java)**  
+**Definition**: A child class inheriting from **multiple parent classes** (Java doesn’t allow this due to the **Diamond Problem**).  
+
+### **Diamond Problem Example**  
+```java
+class A {
+    void show() { System.out.println("A"); }
+}
+class B {
+    void show() { System.out.println("B"); }
+}
+// class C extends A, B { }  ❌ Not allowed in Java
+```
+
+### **Solution: Using Interfaces**  
+```java
+interface A {
+    default void show() { System.out.println("A"); }
+}
+interface B {
+    default void show() { System.out.println("B"); }
+}
+class C implements A, B {
+    @Override  // Must override to resolve conflict
+    public void show() {
+        A.super.show();  // Calls A's show()
+    }
+}
+```
+
+### **Key Points**  
+✔ **Java avoids multiple inheritance** for classes  
+✔ **Interfaces (`implements`)** provide a workaround  
+✔ **Must override conflicting methods**  
+
+---
+
+## **4. Hierarchical Inheritance**  
+**Definition**: Multiple child classes inherit from **a single parent class**.  
+
+### **Example**  
+```java
+class Animal {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog extends Animal {  // Child 1
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {  // Child 2
+    void meow() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();   // Inherited
+        d.bark();   // Own method
+
+        Cat c = new Cat();
+        c.eat();    // Inherited
+        c.meow();   // Own method
+    }
+}
+```
+**Output:**  
+```
+Animal eats  
+Dog barks  
+Animal eats  
+Cat meows
+```
+
+### **Key Points**  
+✔ **One parent → Many children**  
+✔ **Promotes code reuse** (common methods in parent)  
+✔ Example: **`Object` class** is the parent of all Java classes  
+
+---
+
+## **5. Hybrid Inheritance (Not Directly Supported)**  
+**Definition**: A mix of two or more inheritance types (e.g., Single + Multiple).  
+
+### **Example Using Interfaces**  
+```java
+interface A { void showA(); }
+interface B { void showB(); }
+class C implements A, B {  // Multiple (interfaces)
+    public void showA() { System.out.println("A"); }
+    public void showB() { System.out.println("B"); }
+}
+
+class D extends C { }  // Single inheritance
+```
+
+### **Key Points**  
+✔ **Achieved via interfaces + classes**  
+✔ **Not purely supported** due to Java’s restrictions  
+
+---
+
+## **6. Interview Questions & Answers**  
+
+### **Q1: Why is multiple inheritance not allowed in Java?**  
+- **Diamond Problem**: Conflict if two parents have the same method.  
+- **Solution**: Use **interfaces** (default methods).  
+
+### **Q2: What is constructor chaining in multilevel inheritance?**  
+- **`super()`** is called automatically at each level.  
+- Example:  
+  ```java
+  class A { A() { System.out.println("A"); } }
+  class B extends A { B() { System.out.println("B"); } }
+  class C extends B { C() { System.out.println("C"); } }
+  // Output: A → B → C
+  ```
+
+### **Q3: Can we override static methods in inheritance?**  
+❌ **No!** Static methods are **class-level**, not instance-level.  
+
+### **Q4: What is the difference between `extends` and `implements`?**  
+| `extends` | `implements` |  
+|-----------|-------------|  
+| For **class inheritance** | For **interface implementation** |  
+| Only **one parent** allowed | **Multiple interfaces** allowed |  
+
+### **Q5: How is hierarchical inheritance useful?**  
+✔ **Reduces code duplication** (e.g., `Animal` → `Dog`, `Cat`, `Lion`).  
+
+---
+
+## **7. Key Takeaways**  
+✔ **Single**: One child → One parent (`extends`)  
+✔ **Multilevel**: Chain inheritance (Grandparent → Parent → Child)  
+✔ **Multiple**: Not allowed for classes (use **interfaces**)  
+✔ **Hierarchical**: One parent → Many children  
+✔ **Hybrid**: Mix of inheritance types (via interfaces)  
