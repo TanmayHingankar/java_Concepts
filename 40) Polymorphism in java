@@ -1,0 +1,113 @@
+// Parent class
+class A {
+	public void show() {
+		System.out.println("in A show");  // 🔹 Output when obj is instance of A
+	}
+}
+
+// Child class B overriding show()
+class B extends A {
+	public void show() {
+		System.out.println("in B show");  // 🔹 Output when obj refers to B
+	}
+}
+
+// Another child class C
+class C extends A {
+	public void show() {
+		System.out.println("in C show");  // 🔹 Output when obj refers to C
+	}
+}
+
+// Unrelated class (not extending A)
+class D {
+	// No relationship with A
+}
+
+public class Demo {
+	public static void main(String[] args) {
+
+		A obj = new A();  // ✅ Reference type = A, Object type = A
+		obj.show();       // 🔸 Output: in A show
+
+		obj = new B();    // ✅ Reference type = A, Object type = B
+		obj.show();       // 🔸 Output: in B show → Run-time polymorphism
+
+		obj = new C();    // ✅ Reference type = A, Object type = C
+		obj.show();       // 🔸 Output: in C show → Run-time polymorphism
+
+		// obj = new D(); // ❌ ERROR: D is not subclass of A
+
+		// Laptop obj1 = new Laptop();         // ✅ valid if class Laptop exists
+		// Computer obj1 = new Laptop();       // ✅ Run-time polymorphism if Laptop extends Computer
+	}
+}
+
+
+🧠 POLYMORPHISM — Interview Theory Notes
+🔵 Definition:
+
+    Polymorphism = “One name, many forms”
+    i.e., Same function or reference behaves differently depending on context
+
+✌️ Types of Polymorphism in Java:
+Type	Also Called	Based On	Example
+Compile-time Polymorphism	Static Binding, Early Binding	Method Signature	Method Overloading
+Run-time Polymorphism	Dynamic Binding, Late Binding	Object Type	Method Overriding
+1️⃣ Compile-time Polymorphism (Method Overloading)
+
+class Calculator {
+	public int add(int a, int b) {
+		return a + b;
+	}
+
+	public int add(int a, int b, int c) {
+		return a + b + c;
+	}
+}
+
+🟢 Compiler decides which add() to call based on number/type of arguments
+2️⃣ Run-time Polymorphism (Method Overriding)
+
+class Computer {
+	public void run() {
+		System.out.println("Computer running");
+	}
+}
+
+class Laptop extends Computer {
+	public void run() {
+		System.out.println("Laptop running");
+	}
+}
+
+Computer obj = new Laptop();  // Parent reference
+obj.run();                    // Output: Laptop running
+
+🟠 JVM decides at runtime which method to call based on object type
+🔥 VERY IMPORTANT INTERVIEW POINTS
+📌 Difference Between Overloading vs Overriding
+Feature	Overloading	Overriding
+Happens in	Same class	Parent-child (inheritance)
+Signature	Must be different	Must be same
+Return type	Can be different	Should be same or covariant
+Access modifier	Can be anything	Cannot reduce visibility
+Static methods	Can be overloaded	Cannot be overridden
+⚠️ Static Binding vs Dynamic Binding
+Binding Type	When decided	Example
+Static	Compile-time	Overloading
+Dynamic	Run-time	Overriding
+📝 Summary to Remember
+Concept	Key Line
+Polymorphism	One interface → many behaviors
+Overloading	Same method name, different args
+Overriding	Same method, different class
+Dynamic Binding	Object type determines behavior
+💡 Analogy to Understand
+
+    Remote is the reference type (A)
+
+    TV, AC, Fan are object types (B, C…)
+
+    Depending on which device is connected, pressing “Power” does different behavior = Polymorphism
+
