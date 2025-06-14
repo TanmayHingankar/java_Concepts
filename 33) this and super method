@@ -1,0 +1,145 @@
+✅ Part 1: super() Method Example (Inheritance Constructor Chaining)
+
+// super() example: Calls parent class constructor
+
+class A {
+	public A() {
+		super(); // Calls Object class constructor
+		System.out.println("in A"); // Output: in A
+	}
+
+	public A(int n) {
+		super(); // Calls Object class constructor
+		System.out.println("in A int"); // Output: in A int
+	}
+}
+
+class B extends A {
+	public B() {
+		// super(); // By default compiler inserts super()
+		super(5); // Calls A(int n)
+		System.out.println("in B"); // Output: in B
+	}
+
+	public B(int n) {
+		// super(); // Optional. Calls A()
+		super(n); // Calls A(int n)
+		System.out.println("in B int"); // Output: in B int
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) {
+		B obj = new B();   // Output:
+		                   // in A int
+		                   // in B
+		
+		// B obj = new B(5); // Output:
+		// in A int
+		// in B int
+	}
+}
+
+✅ Part 2: this() Method Example (Constructor Chaining in Same Class)
+
+// this() example: Calls constructor from same class
+
+class A {
+	public A() {
+		super(); // Calls Object class constructor
+		System.out.println("in A"); // Output: in A
+	}
+
+	public A(int n) {
+		super();
+		System.out.println("in A int"); // Output: in A int
+	}
+}
+
+class B extends A {
+	public B() {
+		super(); // Calls A()
+		System.out.println("in B"); // Output: in B
+	}
+
+	public B(int n) {
+		this(); // Calls B() => which calls A()
+		System.out.println("in B int"); // Output: in B int
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) {
+		// B obj = new B();   // Output:
+		// in A
+		// in B
+
+		B obj = new B(5);    // Output:
+		                     // in A
+		                     // in B
+		                     // in B int
+	}
+}
+
+📘 Interview-Ready Notes: this() vs super()
+🔹 1. What is super() in Java?
+
+    Used to call parent class constructor.
+
+    Must be the first line in a constructor.
+
+    If not written, compiler automatically inserts super().
+
+Example:
+
+class A {
+	A() { System.out.println("in A"); }
+}
+
+class B extends A {
+	B() {
+		super(); // calls A()
+		System.out.println("in B");
+	}
+}
+
+🔹 2. What is this() in Java?
+
+    Used to call another constructor from the same class.
+
+    Must be the first line in a constructor.
+
+    Helps in constructor chaining within the same class.
+
+Example:
+
+class B {
+	B() {
+		System.out.println("default constructor");
+	}
+	B(int n) {
+		this(); // calls B()
+		System.out.println("param constructor");
+	}
+}
+
+
+4. Interview Questions & Answers
+Q1: Can this() and super() be used together?
+
+❌ No, because both must be the first statement in a constructor.
+Q2: What if neither this() nor super() is written?
+
+    Java automatically adds super() (calling parent's default constructor).
+
+    If parent has no default constructor, compilation error occurs.
+
+Q3: Can this be used in a static method?
+
+❌ No, because this refers to an instance, while static methods belong to the class.
+Q4: Can super call grandparent’s method?
+
+❌ No, super only refers to the immediate parent.
+Q5: Why is super() needed in inheritance?
+
+    To initialize parent class fields before child class fields.
