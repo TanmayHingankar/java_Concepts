@@ -1,0 +1,162 @@
+Bhai, neeche maine **abstract class**, **inner class**, **anonymous inner class**, and **static/this/new keywords** ke **sabhi concepts + updated commented code + interview theory** short and crystal clear form mein diya hai. Isse tu **notes** bhi bana sakta hai aur **revision bhi ek nazar mein ho jayega**.
+
+---
+
+## ✅ Part 1: Abstract Class, Inner Class, Anonymous Class — Theory + Updated Code + Output
+
+### 🔹 Abstract Class – Interview Theory
+
+| Feature                             | Description                                                                                               |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Definition**                      | Abstract class is a class that **cannot be instantiated**. It can have abstract and non-abstract methods. |
+| **Usage**                           | Used to achieve **partial abstraction**. Subclasses must implement abstract methods.                      |
+| **Syntax**                          | `abstract class ClassName { abstract void method(); }`                                                    |
+| **Can have constructor?**           | Yes.                                                                                                      |
+| **Can have static methods/fields?** | Yes.                                                                                                      |
+| **Purpose**                         | To provide a **base class/template** for other classes.                                                   |
+| **Access Modifiers**                | Can be `public`, `protected`, or default.                                                                 |
+
+---
+
+### 🔹 Code: Abstract Class
+
+```java
+abstract class Car
+{
+	public abstract void drive();               // abstract method
+	public abstract void fly();                 // abstract method
+	
+	public void playMusic()                     // concrete method
+	{
+		System.out.println("play music");       // Output: play music
+	}
+}
+
+abstract class WagnoR extends Car
+{
+	public void drive()
+	{
+		System.out.println("Driving...");       // Output: Driving...
+	}
+	// fly() is still abstract, so class remains abstract
+}
+
+class UpdateWagnoR extends WagnoR
+{
+	public void fly()
+	{
+		System.out.println("flying...");        // Output: flying...
+	}
+}
+
+public class Demo {
+    public static void main(String[] args) {
+    	Car obj = new UpdateWagnoR();   // Upcasting
+    	obj.drive();                    // Output: Driving...
+    	obj.fly();                      // Output: flying...
+    	obj.playMusic();               // Output: play music
+    }
+}
+```
+
+---
+
+## ✅ Part 2: Inner Class – Theory + Code
+
+### 🔹 Interview Theory
+
+| Type                      | Description                                                                             |
+| ------------------------- | --------------------------------------------------------------------------------------- |
+| **Member Inner Class**    | Non-static class defined inside another class. Needs outer class object to instantiate. |
+| **Static Nested Class**   | Static inner class. Can be accessed using `Outer.Inner`. Doesn’t need outer object.     |
+| **Local Inner Class**     | Defined inside method. Used for method-level encapsulation.                             |
+| **Anonymous Inner Class** | Class without name; used for overriding or one-time use of abstract/interface class.    |
+
+---
+
+### 🔹 Code: Static Inner Class
+
+```java
+class A
+{
+	int age = 30;
+	
+	public void show()
+	{
+		System.out.println("in show");           // Output: in show
+	}
+	
+	static class B
+	{
+		public void config()
+		{
+			System.out.println("in config");     // Output: in config
+		}
+	}
+}
+
+public class Demo {
+    public static void main(String[] args) {
+    	A obj = new A();
+    	obj.show();
+    	
+    	A.B obj1 = new A.B();  // static inner class doesn't need outer object
+    	obj1.config();
+    }
+}
+```
+
+---
+
+## ✅ Part 3: Anonymous Inner Class – Theory + Code
+
+### 🔹 Interview Theory
+
+| Point          | Description                                                        |
+| -------------- | ------------------------------------------------------------------ |
+| **Definition** | Class without a name, usually used for one-time method override.   |
+| **Used for**   | Abstract class, Interface, or extending another class anonymously. |
+| **Why?**       | Saves space and quick one-time implementation.                     |
+
+---
+
+### 🔹 Code: Anonymous Inner Class from Abstract Class
+
+```java
+abstract class A
+{  
+	public abstract void show();
+	public abstract void config();
+}
+
+public class Demo {
+    public static void main(String[] args) {
+    	A obj = new A() {
+    		public void show() {
+    			System.out.println("in new show");       // Output: in new show
+    		}
+    		
+    		public void config() {
+    			System.out.println("in new config");     // Output: in new config
+    		}
+    	};
+    	obj.show();
+    	obj.config();
+    }
+}
+```
+
+
+
+## ✅ Interview Preparation Summary
+
+| Concept             | Most Asked Questions                                                                |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| **Abstract Class**  | Why use abstract class over interface? Can we create constructor in abstract class? |
+| **Inner Class**     | Difference between static and non-static inner class? Real use cases?               |
+| **Anonymous Inner** | Where to use? Syntax with abstract/interface?                                       |
+| **Static**          | What is static variable? Can static method use `this`?                              |
+| **this**            | What is `this` keyword? Use of `this()` constructor call?                           |
+| **new**             | What happens behind the scene when we use `new` keyword?                            |
+
+---
