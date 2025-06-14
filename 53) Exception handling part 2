@@ -1,0 +1,193 @@
+# **Exception Handling in Java - Complete Guide**
+
+## **1. Exception Hierarchy**
+```java
+Object
+  └── Throwable
+      ├── Error (Unchecked)
+      │   ├── ThreadDeath
+      │   ├── VirtualMachineError (OutOfMemoryError)
+      │   └── IOError
+      └── Exception
+          ├── RuntimeException (Unchecked)
+          │   ├── ArithmeticException
+          │   ├── ArrayIndexOutOfBoundsException
+          │   └── NullPointerException
+          └── Checked Exceptions
+              ├── SQLException
+              └── IOException
+```
+
+### **Key Points:**
+- **Checked Exceptions**: Must be handled (compile-time enforcement)
+- **Unchecked Exceptions**: Optional to handle (RuntimeException subclasses)
+
+---
+
+## **2. Your Code Examples Explained**
+
+### **Example 1: Basic Exception Handling**
+```java
+public class Demo {
+    public static void main(String[] args) {
+        int i = 0;
+        int j = 0;
+        
+        try {
+            j = 18/i;  // Throws ArithmeticException
+            if(j == 0)
+                throw new ArithmeticException("I don't want to print zero");
+        }
+        catch(ArithmeticException e) {
+            System.out.println("Default output: " + e); 
+            // Output: "Default output: java.lang.ArithmeticException: / by zero"
+        }
+        catch(Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        System.out.println(j);  // Output: 0
+        System.out.println("Bye");  // Output: Bye
+    }
+}
+```
+
+### **Example 2: Custom Exception**
+```java
+class NavinException extends Exception {
+    public NavinException(String message) {
+        super(message);  // Calls Exception class constructor
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        int i = 20;
+        int j = 0;
+        
+        try {
+            j = 18/i;  // j = 0
+            if(j == 0)
+                throw new NavinException("I don't want to print zero");
+        }
+        catch(NavinException e) {
+            System.out.println("Custom exception: " + e);
+            // Output: "Custom exception: NavinException: I don't want to print zero"
+        }
+        System.out.println(j);  // Output: 0
+        System.out.println("Bye");  // Output: Bye
+    }
+}
+```
+
+### **Example 3: Throws Keyword**
+```java
+class A {
+    public void show() throws ClassNotFoundException {
+        Class.forName("Calc");  // Throws ClassNotFoundException
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        A obj = new A();
+        try {
+            obj.show();  // Will throw ClassNotFoundException
+        } 
+        catch(ClassNotFoundException e) {
+            e.printStackTrace();  // Prints stack trace
+        }
+    }
+}
+```
+
+### **Example 4: Input Handling**
+```java
+import java.util.Scanner;
+
+public class Demo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number");
+        
+        try {
+            int num = sc.nextInt();  // Reads integer input
+            System.out.println("You entered: " + num);
+        } 
+        catch(Exception e) {
+            System.out.println("Invalid input");
+        }
+    }
+}
+```
+
+---
+
+## **3. Key Concepts**
+
+### **1. try-catch-finally**
+```java
+try {
+    // Risky code
+} 
+catch(ExceptionType e) {
+    // Handle exception
+} 
+finally {
+    // Always executes (cleanup code)
+}
+```
+
+### **2. throw vs throws**
+| `throw` | `throws` |
+|---------|----------|
+| Used to explicitly throw an exception | Declares exceptions a method might throw |
+| Inside method body | In method signature |
+| `throw new Exception();` | `void method() throws Exception` |
+
+### **3. Custom Exceptions**
+- Extend `Exception` (checked) or `RuntimeException` (unchecked)
+- Best practice: Provide useful constructor(s)
+
+### **4. Exception Propagation**
+- Uncaught exceptions propagate up the call stack
+- Can be caught by any caller in the stack
+
+---
+
+## **4. Interview Questions**
+
+### **Q1: Difference between Error and Exception?**
+- **Errors**: Serious problems (OutOfMemoryError) - not meant to be caught
+- **Exceptions**: Conditions that can be handled (IOException)
+
+### **Q2: Checked vs Unchecked exceptions?**
+| Checked | Unchecked |
+|---------|-----------|
+| Must be handled/declared | Optional to handle |
+| Compile-time checking | Runtime only |
+| `IOException`, `SQLException` | `NullPointerException`, `ArrayIndexOutOfBoundsException` |
+
+### **Q3: Why use finally block?**
+✔ Guaranteed execution for cleanup (closing files, DB connections)
+
+### **Q4: Can we have try without catch?**
+✅ Yes, with finally:  
+```java
+try { /* code */ } 
+finally { /* cleanup */ }
+```
+
+### **Q5: Best practices for exceptions?**
+- Catch specific exceptions first
+- Don't swallow exceptions (empty catch blocks)
+- Use custom exceptions for business errors
+- Clean up resources in finally/try-with-resources
+
+---
+
+## **5. Key Takeaways**
+✔ **Try-catch-finally**: Handle exceptions gracefully  
+✔ **throw**: Raise exceptions, **throws**: Declare exceptions  
+✔ **Custom Exceptions**: Create domain-specific errors  
+✔ **Checked vs Unchecked**: Compile-time vs runtime handling  
+
