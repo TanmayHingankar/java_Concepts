@@ -1,50 +1,53 @@
-// Uncommented version for better understanding
+// 🔒 Final class (agar uncomment karo toh isse extend nahi kiya ja sakta)
+// final class Calc {
+//     public void show() {
+//         System.out.println("in Calc show");
+//     }
+//     public void add(int a, int b) {
+//         System.out.println(a + b);
+//     }
+// }
 
-// Parent class
-class A {
-	public void show() {
-		System.out.println("in A show");  // 🟩 Output when obj refers to A
+// 👇 This class is not final, but has a final method
+class Calc {
+	public final void show() {
+		System.out.println("By Navin"); // ✅ Output when called
+	}
+	
+	public void add(int a, int b) {
+		System.out.println(a + b); // ✅ Output: 4 + 5 = 9
 	}
 }
 
-// Child class B overriding show()
-class B extends A {
-	public void show() {
-		System.out.println("in B show");  // 🟩 Output when obj refers to B
-	}
-}
+// Trying to override final method here ❌ Error
+class AdvCalc extends Calc {
+	
+	// ❌ Compilation Error: Cannot override final method from Calc
+//	public void show() {
+//		System.out.println("By John");
+//	}
 
-// Another child class C overriding show()
-class C extends A {
-	public void show() {
-		System.out.println("in C show");  // 🟩 Output when obj refers to C
+	// This method is okay (not final in parent)
+	public void add(int a, int b) {
+		System.out.println("Sum is: " + (a + b));  // ✅ Output: Sum is: 9
 	}
-}
-
-// Unrelated class D (no inheritance)
-class D {
-	// No methods or inheritance
 }
 
 public class Demo {
 	public static void main(String[] args) {
+		
+		// 🔐 Final variable - can't be changed
+//		final int num = 8;    // valid
+//		num = 9;              // ❌ Error: can't assign a value to final variable
+//		System.out.println(num);
 
-		A obj = new A();      // Reference = A, Object = A
-		obj.show();           // ✅ Output: in A show
+		// ✔️ Using AdvCalc object
+		AdvCalc obj = new AdvCalc();
 
-		obj = new B();        // Reference = A, Object = B
-		obj.show();           // ✅ Output: in B show (runtime polymorphism)
-
-		obj = new C();        // Reference = A, Object = C
-		obj.show();           // ✅ Output: in C show (runtime polymorphism)
-
-		// obj = new D();     // ❌ Compile-time Error: D is not subclass of A
-
-		// Laptop obj1 = new Laptop();            // ✅ Valid only if Laptop class exists
-		// Computer obj1 = new Laptop();          // ✅ Valid only if Laptop extends Computer
+		obj.show();           // ✅ Output: By Navin (inherited from Calc, not overridden)
+		obj.add(4, 5);        // ✅ Output: Sum is: 9
 	}
 }
-
 
 
 # **Final Keyword in Java - Complete Guide**  
