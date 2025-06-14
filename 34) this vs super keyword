@@ -1,0 +1,41 @@
+class A extends Object // A class Object class se extend ho rahi hai (implicitly hota hai, explicitly likha hai yahan)
+{
+	int num = 1; // A class ka instance variable num = 1
+}
+
+class B extends A // B class, A class ko extend kar rahi hai
+{
+	int num = 2; // B class ka instance variable num = 2
+
+	public int getValue() // Method of class B
+	{
+		int num = 3; // Local variable inside method = 3
+		// return this.num; // agar ye hota toh B class ka num (2) return hota
+		return super.num; // A class ka num (1) return karega
+	}
+}
+
+public class Demo
+{
+	public static void main(String a[]) 
+	{
+		B obj = new B(); // B class ka object banaya, jismein A ka bhi data hoga
+		// System.out.println(obj.num); // ye B class ka num (2) print karta
+		System.out.println(obj.getValue()); // Output: 1, kyunki super.num = A class ka num
+	}
+}
+
+
+Key Takeaways
+
+✔ this = Current object | super = Parent object
+✔ this() = Calls current class constructor
+✔ super() = Calls parent constructor (auto-added if missing)
+✔ Both must be the first statement in a constructor
+✔ Cannot use both this() and super() together
+
+Core Definitions
+
+Keyword	Refers To	Usage Context
+this	Current class instance	Inside instance methods/constructors
+super	Parent class instance	Only in inheritance (child classes)
