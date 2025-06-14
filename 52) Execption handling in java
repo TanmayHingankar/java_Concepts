@@ -1,0 +1,138 @@
+✅ Types of Errors in Java
+Type	Meaning	Example	Solved by
+1. Compile-Time Error	Syntax error	System.out.Println();	Fix syntax
+2. Run-Time Error	Happens during execution	int a = 10/0;	Exception Handling
+3. Logical Error	Wrong output, no error	int avg = sum * total;	Testing, debugging
+✅ Code 1: Compile-Time Error
+
+public class Demo {
+    public static void main(String[] args) {
+
+//  	System.out.Println();  // ❌ Compile-Time Error: println() is case-sensitive
+
+    	System.out.println(2 + 2);  // ✅ Output: 4
+    }
+}
+
+✅ Code 2: Simple Runtime Exception Handling
+
+public class Demo {
+    public static void main(String[] args) {
+    
+    int i = 0;
+    int j = 0;
+
+    try {
+        j = 18 / i;  // ❌ Runtime Error: / by zero (ArithmeticException)
+    } catch(Exception e) {
+        System.out.println("Something went wrong");  // ✅ Output
+    }
+
+    System.out.println(j);  // ✅ Output: 0 (because it was initialized)
+    System.out.println("Bye");  // ✅ Output: Bye
+    }
+}
+
+✅ Code 3: Multiple Exceptions Handling
+
+public class Demo {
+    public static void main(String[] args) {
+    	
+    	int i = 2;  // Try i=0 for ArithmeticException
+    	int j = 0;
+    	
+    	int nums[] = new int[5];  // Valid index: 0-4
+    	String str = null;        // ❌ Null pointer when str.length() is called
+    	
+    	try {
+    		j = 18 / i;  // No exception
+    		System.out.println(str.length());  // ❌ NullPointerException
+    		System.out.println(nums[1]);  // ✅ Output: 0
+    		System.out.println(nums[5]);  // ❌ ArrayIndexOutOfBoundsException
+    	} 
+    	catch(ArithmeticException e) {
+    		System.out.println("Cannot divide by zero");
+    	}
+    	catch(ArrayIndexOutOfBoundsException e) {
+    		System.out.println("Stay in your limit.");
+    	}
+    	catch(Exception e) {
+    		System.out.println("Something went wrong: " + e);
+    	}
+    	
+    	System.out.println(j);  // ✅ Output: 9
+    	System.out.println("Bye");  // ✅ Output: Bye
+    }
+}
+
+✅ Output (when str = null)
+
+Something went wrong: java.lang.NullPointerException
+9
+Bye
+
+✅ 📘 Theory: Java Exception Handling
+🔸 What is Exception?
+
+    Unexpected event that disrupts program flow during runtime.
+
+🔹 Why Exception Handling is needed?
+
+    Prevent program from crashing.
+
+    Provide meaningful messages.
+
+    Maintain normal flow after error.
+
+✅ Keywords Summary:
+Keyword	Purpose
+try	Code that might throw an exception
+catch	Handle specific exception
+finally	Always executes (even after return/exception)
+throw	Used to throw exception manually
+throws	Declares exceptions a method might throw
+✅ try-catch-finally Structure
+
+try {
+   // risky code
+} catch (ExceptionType e) {
+   // handle exception
+} finally {
+   // always executed
+}
+
+✅ try-with-multiple-catch blocks
+
+try {
+   int arr[] = new int[3];
+   System.out.println(arr[5]);
+} catch (ArithmeticException e) {
+   System.out.println("Divide by zero");
+} catch (ArrayIndexOutOfBoundsException e) {
+   System.out.println("Index out of range");
+} catch (Exception e) {
+   System.out.println("Something went wrong");
+}
+
+✅ Java executes only the first matching catch.
+✅ finally block example
+
+try {
+   int a = 10/0;
+} catch (Exception e) {
+   System.out.println("Error handled");
+} finally {
+   System.out.println("Always executed");
+}
+
+✅ Lambda with try-catch (Java 8+)
+
+Runnable task = () -> {
+	try {
+		int a = 10 / 0;
+	} catch (Exception e) {
+		System.out.println("Caught in lambda: " + e);
+	}
+};
+
+task.run();  // ✅ Output: Caught in lambda: java.lang.ArithmeticException
