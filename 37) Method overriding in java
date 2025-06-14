@@ -1,0 +1,135 @@
+// Base class
+class Calc 
+{
+	public int add(int n1, int n2)     // Parent class method
+	{
+		return n1 + n2;                // This will return 7 (if called)
+	}
+}
+
+// Derived class (Child of Calc)
+class AdvCalc extends Calc
+{
+	@Override
+	public int add(int n1, int n2)     // Overridden method
+	{
+		return n1 + n2 + 1;           // This will return 8 (3+4+1) because it overrides the parent
+	}
+}
+
+public class Demo {
+	public static void main(String args[])
+	{
+		AdvCalc obj = new AdvCalc();         // Creating object of AdvCalc
+		int r1 = obj.add(3, 4);              // Calls overridden method in AdvCalc
+		System.out.println(r1);              // Output: 8
+	}
+}
+
+
+🔵 What is Method Overriding?
+
+    When a child class provides its own implementation of a method that is already defined in the parent class.
+
+    Both methods must have same name, return type, and parameters.
+
+    Requires inheritance.
+
+✅ Rules of Method Overriding:
+
+    Must have same method signature.
+
+    Method must be inherited from the superclass.
+
+    Access modifier in child class must be same or more accessible (e.g., protected → public is allowed).
+
+    Cannot override private, static, or final methods.
+
+    Use @Override annotation for clarity (optional but recommended).
+
+Method Overriding in Java - Complete Guide
+1. What is Method Overriding?
+
+Definition: When a child class provides its own implementation of a method that is already defined in its parent class.
+Why Use Method Overriding?
+
+✔ Runtime Polymorphism – Same method behaves differently based on the object
+✔ Customization – Modify parent class behavior in child class
+✔ Flexibility – Child class can extend or replace parent functionality
+2. Rules of Method Overriding
+Rule	Explanation
+Same Method Name & Parameters	Must match parent method signature
+Access Modifier	Cannot be more restrictive (e.g., parent protected → child cannot be private)
+Return Type	Must be the same or a covariant (subclass) return type
+final Methods	Cannot be overridden
+static Methods	Cannot be overridden (method hiding instead)
+private Methods	Cannot be overridden (not inherited)
+@Override Annotation	Recommended (ensures correct overriding)
+3. Example of Method Overriding
+🔹 Parent Class
+java
+
+class Animal {
+    void makeSound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+🔹 Child Class Overriding
+java
+
+class Dog extends Animal {
+    @Override
+    void makeSound() {  // Same method name & parameters
+        System.out.println("Dog barks");
+    }
+}
+
+🔹 Testing Polymorphism
+java
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Animal();
+        a.makeSound();  // Output: "Animal makes sound"
+
+        Animal d = new Dog();  // Upcasting (Polymorphism)
+        d.makeSound();  // Output: "Dog barks" (Overridden method)
+    }
+}
+
+Output:
+text
+
+Animal makes sound  
+Dog barks
+
+
+Interview Questions & Answers
+Q1: Can we override private methods?
+
+❌ No! Private methods are not inherited, so they cannot be overridden.
+Q2: What is the difference between method overriding and method overloading?
+Overriding	Overloading
+Same method signature in child class	Same method name but different parameters
+Runtime polymorphism	Compile-time polymorphism
+Needs inheritance	Can be in same class
+Q3: Can we override final methods?
+
+❌ No! final methods are locked and cannot be overridden.
+Q4: Can we override static methods?
+
+❌ No! Static methods are class-level, so they are hidden, not overridden.
+Q5: What happens if we change the return type in overriding?
+
+    Allowed only if the new return type is a subclass (covariant return).
+
+    Otherwise, compilation error.
+
+6. Key Takeaways
+
+✔ Method overriding = Same method name + parameters in child class
+✔ @Override annotation ensures correctness
+✔ Covariant return types are allowed
+✔ Cannot override private, final, or static methods
+✔ super.method() calls parent method
