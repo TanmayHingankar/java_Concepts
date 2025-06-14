@@ -1,0 +1,172 @@
+Bhai Tanmay, tu full preparation mode mein hai, and that’s the spirit 💯
+Main neeche do parts mein sab kuch **crystal clear & interview-ready** de raha hoon:
+
+---
+
+## ✅ PART 1: `Laptop` Class with `toString()` and `equals()` — Full Code + Comments + Output + Interview Concepts
+
+### 🔷 Updated Code with Line-by-Line Comments
+
+```java
+class Laptop {
+	String model; // ex: Lenevo Yoga
+	int price;    // ex: 1000
+	
+	// Overrides Object class's toString()
+	public String toString() {
+		// Will return something like: Lenevo Yoga : 1000
+		return model + " : " + price;
+	}
+
+	// Custom equals method (not overriding Object.equals)
+	public boolean equals(Laptop that) {
+		// Compares two laptops based on model and price
+		return this.model.equals(that.model) && this.price == that.price;
+	}
+}
+	
+public class Demo {
+	public static void main(String[] args) {
+		Laptop obj = new Laptop();       // Creates first object
+		obj.model = "Lenevo Yoga";       // model: Lenevo Yoga
+		obj.price = 1000;                // price: 1000
+		
+		Laptop obj2 = new Laptop();      // Creates second object
+		obj2.model = "Lenevo Yoga";      // Same model
+//		obj2.model = "Lenevo Yoga1";    // Try this to test false case
+		obj2.price = 1000;               // Same price
+
+		boolean result = obj.equals(obj2);  // Calls custom equals
+		System.out.println("Are laptops equal? " + result); // ✅ Output: true
+
+		System.out.println(obj.toString()); // ✅ Output: Lenevo Yoga : 1000
+//		System.out.println(obj);           // also calls toString() implicitly
+	}
+}
+```
+
+---
+
+### ✅ OUTPUT:
+
+```
+Are laptops equal? true
+Lenevo Yoga : 1000
+```
+
+---
+
+### 📘 Interview Concepts Covered:
+
+| Concept                   | Explanation                                                                                                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `toString()`              | Default in Object class, used for meaningful print of objects. You override it to return custom string like "Model : Price". |
+| `equals()`                | Also in Object class. Default compares memory addresses. Custom version checks actual content.                               |
+| `obj.equals(obj2)`        | Compares model and price. If both match → true.                                                                              |
+| `System.out.println(obj)` | Implicitly calls `toString()` method.                                                                                        |
+| `==` vs `equals()`        | `==` compares references (memory address), `equals()` can be overridden to compare content.                                  |
+
+---
+
+## ✅ PART 2: `static`, `this`, and `new` — Complete Short Notes for Interviews
+
+---
+
+### 🔷 `static` in Java (Keyword)
+
+| Used With         | Meaning                                                                          |
+| ----------------- | -------------------------------------------------------------------------------- |
+| `static variable` | Shared across all objects. Memory allocated once in class area.                  |
+| `static method`   | Can be called without creating an object. Can’t use non-static members directly. |
+| `static block`    | Runs when class is loaded (used to initialize static data).                      |
+
+```java
+class Counter {
+	static int count = 0; // shared across all objects
+
+	public Counter() {
+		count++; // increment every time object is created
+		System.out.println("Object number: " + count);
+	}
+}
+```
+
+### ✅ Output:
+
+```
+Object number: 1
+Object number: 2
+```
+
+---
+
+### 🔷 `this` keyword in Java
+
+| Purpose                  | Usage                                           |
+| ------------------------ | ----------------------------------------------- |
+| Refers to current object | Used to access current class fields             |
+| Resolves naming conflict | When local and instance variable names are same |
+
+```java
+class Student {
+	String name;
+
+	Student(String name) {
+		this.name = name; // 'this' refers to the current object
+	}
+}
+```
+
+---
+
+### 🔷 `new` keyword in Java
+
+| Purpose           | Explanation                                   |
+| ----------------- | --------------------------------------------- |
+| Allocates memory  | Used to create object in heap memory          |
+| Returns reference | You use it like: `Student s = new Student();` |
+
+```java
+Student s = new Student("Tanmay"); // allocates object in heap
+```
+
+---
+
+### 🔷 Summary Table (for revision):
+
+| Keyword  | Purpose                  | Notes                  |
+| -------- | ------------------------ | ---------------------- |
+| `static` | Class-level sharing      | No object needed       |
+| `this`   | Current object reference | Resolves name conflict |
+| `new`    | Object creation          | Allocates memory       |
+
+---
+
+### 🔥 Quick One-Liner Quiz-Style Questions:
+
+1. **Can static methods access non-static variables?**
+   ❌ No, only after object creation.
+
+2. **Can we override static methods?**
+   ❌ No. Static methods are resolved at **compile-time** (method hiding, not overriding).
+
+3. **Why do we use `this`?**
+   ✅ To refer to the current object, mainly to resolve shadowing.
+
+4. **Does every object have its own copy of static variable?**
+   ❌ No. Shared across all instances.
+
+5. **When is static block executed?**
+   ✅ When class is loaded into memory.
+
+---
+
+## ✅ Interview Cheat Points:
+
+* `static variable` – class level, shared, saved in method area
+* `this` – refers to **current object** (default reference)
+* `new` – allocates **heap memory**, returns reference
+* `equals()` – override for **content comparison**
+* `toString()` – override for **custom object string**
+
+
