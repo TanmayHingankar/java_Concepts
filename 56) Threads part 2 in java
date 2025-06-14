@@ -1,0 +1,195 @@
+🧵 PART-1: Runnable, Lambda Threads – With Output
+
+```java
+class Z {
+    // Empty class — not used in this example
+}
+
+class A implements Runnable {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Hi"); // Output: Hi
+            try {
+                Thread.sleep(10); // Sleep for 10 ms
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+class B implements Runnable {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Hello"); // Output: Hello
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+
+        // ✅ Lambda expression replacing A and B classes
+        Runnable obj1 = () -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Hi");
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Runnable obj2 = () -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Hello");
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Thread t1 = new Thread(obj1); // Creating Thread t1 from Runnable obj1
+        Thread t2 = new Thread(obj2); // Creating Thread t2 from Runnable obj2
+
+        t1.start(); // Start thread t1
+        t2.start(); // Start thread t2
+
+        // ✅ Output: Interleaved "Hi" and "Hello" printed 5 times each
+    }
+}
+```
+
+---
+
+## 🧠 Runnable Interface vs Thread Class
+
+| Feature               | `Thread` Class            | `Runnable` Interface         |
+| --------------------- | ------------------------- | ---------------------------- |
+| Inheritance used?     | Yes (`extends Thread`)    | No (`implements Runnable`)   |
+| Multiple inheritance? | Not possible              | ✅ Possible                   |
+| Reusability           | Limited (tightly coupled) | ✅ Better reusability         |
+| Best practice?        | ❌ Avoid if possible       | ✅ Preferred in real projects |
+
+---
+
+## 🛠️ PART-2: Race Condition + Synchronized
+
+```java
+class Counter {
+    int count;
+
+    // Method to safely increment the counter
+    public synchronized void increment() {
+        count++; // Critical section — accessed by multiple threads
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        Counter c = new Counter();
+
+        Runnable obj1 = () -> {
+            for (int i = 1; i <= 10000; i++) {
+                c.increment();  // Safe increment
+            }
+        };
+
+        Runnable obj2 = () -> {
+            for (int i = 1; i <= 10000; i++) {
+                c.increment();  // Safe increment
+            }
+        };
+
+        Thread t1 = new Thread(obj1);
+        Thread t2 = new Thread(obj2);
+
+        t1.start();  // Start t1
+        t2.start();  // Start t2
+
+        t1.join();   // Wait for t1 to finish
+        t2.join();   // Wait for t2 to finish
+
+        System.out.println(c.count); // ✅ Output: 20000 (correct due to synchronized)
+    }
+}
+```
+
+---
+
+## 🔥 What is a Race Condition?
+
+* When **2+ threads** access a **shared resource** *at the same time* without synchronization.
+* Causes **incorrect/unstable output**.
+* **Fix**: Use `synchronized` to lock critical sections.
+
+---
+
+## 🔄 Thread Lifecycle / States (Important for Interviews)
+
+| State         | Meaning                                                     |
+| ------------- | ----------------------------------------------------------- |
+| New           | Thread is created but not started yet (`new Thread()`)      |
+| Runnable      | Thread is ready to run (`start()` called)                   |
+| Running       | Thread is actively executing `run()`                        |
+| Waiting       | Thread is paused (via `sleep()`, `wait()`)                  |
+| Timed Waiting | Thread waits for specific time (e.g., `Thread.sleep(1000)`) |
+| Blocked       | Thread trying to access resource locked by another thread   |
+| Terminated    | Thread finishes execution                                   |
+
+---
+
+## 🧩 notify() and wait() in Java (for Inter-thread communication)
+
+* `wait()` → moves thread to **waiting** state.
+* `notify()` → wakes up a single waiting thread (moves to runnable).
+* Both are called on objects inside `synchronized` block.
+
+```java
+synchronized(obj) {
+    obj.wait();     // Pauses thread
+    obj.notify();   // Wakes up a waiting thread
+}
+```
+
+---
+
+## ⚙️ Thread Concepts – Cheat Sheet for Interview
+
+| Concept              | Description                                         |
+| -------------------- | --------------------------------------------------- |
+| `start()`            | Starts new thread execution                         |
+| `run()`              | Defines task done by thread                         |
+| `sleep()`            | Pauses thread temporarily                           |
+| `join()`             | Waits for thread to finish                          |
+| `synchronized`       | Prevents race condition                             |
+| `isAlive()`          | Checks if thread is alive                           |
+| `Runnable` Interface | Used to define thread logic without extending class |
+| `Thread` Class       | Extends to create thread directly                   |
+| `Lambda + Runnable`  | Shorter syntax for defining thread logic            |
+
+---
+
+## 🔚 Sample Output
+
+```bash
+Hi
+Hello
+Hi
+Hello
+Hi
+Hello
+...
+// Each 5 times, mixed due to multithreading
+20000  // Correct output after safe increment with synchronized
+```
+
+---
