@@ -1,0 +1,121 @@
+✅ Java Enum – Interview Theory
+Point	Detail
+What is enum?	Enum (short for enumeration) is a special class that represents a group of constants.
+Syntax	enum Status { RUNNING, FAILED, PENDING, SUCCESS }
+Extends?	Enums implicitly extend java.lang.Enum. Cannot extend any other class.
+Can have fields/methods?	Yes, can have constructors, fields, and methods.
+Accessing Enum Values	Use .values(), .ordinal(), and .valueOf().
+Usage	For fixed constant values – e.g., States, Status, Seasons, Directions.
+🧪 1. Basic Enum with values() and ordinal()
+✅ Updated Code with Comments
+
+enum Status {
+	Running, Failed, Pending, Success;
+}
+
+public class Demo {
+    public static void main(String[] args) {
+
+    	Status[] ss = Status.values();  // gets all enum constants
+    	
+    	for (Status s : ss) {
+    		System.out.println(s);                  // Output: Running, Failed, Pending, Success
+    		System.out.println(s + " : " + s.ordinal());  // ordinal = position (0-based)
+    	}
+    }
+}
+
+✅ Output:
+
+Running
+Running : 0
+Failed
+Failed : 1
+Pending
+Pending : 2
+Success
+Success : 3
+
+🧪 2. Enum with switch-case and if-else
+
+enum Status {
+	Running, Failed, Pending, Success;
+}
+
+public class Demo {
+    public static void main(String[] args) {
+
+    	Status s = Status.Pending;
+    	
+    	switch(s)
+    	{
+    		case Running:
+    			System.out.println("All Good");     // Not executed
+    			break;
+    			
+    		case Failed:
+    			System.out.println("Try Again");    // Not executed
+    			break;
+    			
+    		case Pending:
+    			System.out.println("Please Wait");  // ✅ Output: Please Wait
+    			break;
+    		
+    		default:
+    			System.out.println("Done");
+    			break;
+    	}
+    	
+    	if(s == Status.Running)
+    		System.out.println("All Good");
+    	else if(s == Status.Failed)
+    		System.out.println("Try Again");
+    	else if(s == Status.Pending)
+    		System.out.println("Please Wait");      // ✅ Output: Please Wait
+    	else
+    		System.out.println("Done");
+    }
+}
+
+🧪 3. Enum with Constructor and Fields
+
+enum Laptop {
+	Mackbook(2000), XPS(2200), Surface, ThinkPad(1800);
+	
+	private int price;
+
+	private Laptop() {
+		price = 500;                              // Called for Surface
+	}
+	
+	private Laptop(int price) {
+		this.price = price;                       // Called for other values
+	}
+	
+	public int getPrice() {
+		return price;
+	}
+	
+	public void setPrice(int price) {
+		this.price = price;
+		System.out.println("in Laptop " + this.name());
+	}
+}
+
+public class Demo {
+    public static void main(String[] args) {
+    	
+    	for (Laptop lap : Laptop.values()) {
+    		System.out.println(lap + " : " + lap.getPrice());
+    	}
+    }
+}
+
+✅ Output:
+
+Mackbook : 2000
+XPS : 2200
+Surface : 500
+ThinkPad : 1800
+
+
