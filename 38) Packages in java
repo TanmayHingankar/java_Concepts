@@ -1,0 +1,190 @@
+package other.tools;  // Declares this file is inside folder other/tools
+
+public class Calc
+{
+	public int add(int n1, int n2)        // Method to add two numbers
+	{
+		return n1 + n2;
+	}
+	
+	public int sub(int n1, int n2)        // Method to subtract two numbers
+	{
+		return n1 - n2;
+	}
+}
+
+package tools;
+
+import other.tools.Calc;   // Must import parent class if it's from different package
+
+public class AdvCalc extends Calc   // Inheriting from Calc class
+{
+	public int multi(int n1, int n2)      // Multiplication method
+	{
+		return n1 * n2;
+	}
+	
+	public int div(int n1, int n2)        // Division method
+	{
+		return n1 / n2;
+	}
+}
+
+package other;  // Basic empty class
+
+public class A
+{
+	// Empty class
+}
+
+package com.google.Calculation;  // This file belongs to folder structure com/google/Calculation
+
+// ✅ Required imports
+import other.tools.*;     // Imports Calc class from other.tools package
+import tools.*;           // Imports AdvCalc from tools package
+import other.A;           // Imports class A from other package
+
+public class Demo
+{
+	public static void main(String args[])
+	{
+		Calc obj = new Calc();            // Creates object of Calc
+		System.out.println(obj.add(5, 3));   // Output: 8
+		System.out.println(obj.sub(10, 4));  // Output: 6
+
+		AdvCalc obj1 = new AdvCalc();       // Creates object of AdvCalc (which extends Calc)
+		System.out.println(obj1.add(4, 4));  // Output: 8 (inherited)
+		System.out.println(obj1.multi(3, 5)); // Output: 15
+		System.out.println(obj1.div(10, 2));  // Output: 5
+
+		A obj2 = new A();                   // Object of empty class A
+	}
+}
+
+
+
+
+# **Packages in Java - Complete Guide**  
+
+## **1. What is a Package?**  
+**Definition**: A package is a **folder-like structure** that organizes related Java classes/interfaces.  
+
+### **Why Use Packages?**  
+✔ **Avoid naming conflicts** (e.g., two classes named `Date`)  
+✔ **Better organization** (group related classes)  
+✔ **Access control** (`protected`/default access works at package level)  
+✔ **Reusability** (import and use classes across projects)  
+
+---
+
+## **2. Types of Packages**  
+
+| Type | Description | Example |
+|------|------------|---------|
+| **Built-in Packages** | Provided by Java (JDK) | `java.lang`, `java.util`, `java.io` |
+| **User-defined Packages** | Created by developers | `com.mycompany.project` |
+
+---
+
+## **3. How to Create & Use Packages?**  
+
+### **🔹 Creating a Package**  
+```java
+// Save as: com/example/Test.java  
+package com.example;  // Declares the package  
+
+public class Test {  
+    public static void main(String[] args) {  
+        System.out.println("Package example");  
+    }  
+}  
+```
+**To Compile & Run:**  
+```bash
+javac -d . Test.java  # Creates com/example/Test.class  
+java com.example.Test # Runs the program  
+```
+
+### **🔹 Importing a Package**  
+```java
+// Import single class  
+import java.util.ArrayList;  
+
+// Import all classes from a package  
+import java.util.*;  
+
+public class Main {  
+    public static void main(String[] args) {  
+        ArrayList<String> list = new ArrayList<>();  
+    }  
+}  
+```
+
+---
+
+## **4. Key Concepts**  
+
+### **✔ Default Package**  
+- If no package is declared, the class belongs to the **unnamed default package**.  
+- ❌ **Not recommended** for real projects.  
+
+### **✔ Static Imports**  
+- Import static members (variables/methods) directly.  
+```java
+import static java.lang.Math.PI;  
+import static java.lang.Math.pow;  
+
+public class Main {  
+    public static void main(String[] args) {  
+        System.out.println(PI);       // No need for Math.PI  
+        System.out.println(pow(2,3)); // No need for Math.pow  
+    }  
+}  
+```
+
+### **✔ Package Naming Conventions**  
+- Use **reverse domain name** (e.g., `com.google.project`)  
+- Lowercase letters only  
+
+### **✔ Access Control with Packages**  
+| Modifier | Class | Package | Subclass | World |
+|----------|-------|---------|----------|-------|
+| `public` | ✅ | ✅ | ✅ | ✅ |
+| `protected` | ✅ | ✅ | ✅ | ❌ |
+| **default** (no modifier) | ✅ | ✅ | ❌ | ❌ |
+| `private` | ✅ | ❌ | ❌ | ❌ |
+
+---
+
+## **5. Interview Questions & Answers**  
+
+### **Q1: What is the purpose of `package` keyword?**  
+- Declares which package a class belongs to.  
+
+### **Q2: Can a class exist without a package?**  
+✅ **Yes**, but it goes to the **default package** (not recommended).  
+
+### **Q3: What is `CLASSPATH`?**  
+- Environment variable that tells JVM **where to look for classes/packages**.  
+
+### **Q4: Difference between `import java.util.*` and `import java.util.ArrayList`?**  
+| `import java.util.*` | `import java.util.ArrayList` |  
+|----------------------|-----------------------------|  
+| Imports **all classes** from `java.util` | Imports **only `ArrayList`** |  
+| Slower compilation (checks all classes) | Faster compilation |  
+
+### **Q5: How to compile a package?**  
+```bash
+javac -d . MyClass.java  # Creates package structure  
+```
+
+---
+
+## **6. Key Takeaways**  
+✔ **Packages = Folders for organizing classes**  
+✔ **`package` declares, `import` accesses**  
+✔ **Use reverse domain naming (e.g., `com.example`)**  
+✔ **Static imports bring in static members**  
+✔ **Access control depends on packages**  
+
+Master these concepts to **ace package-related interview questions**! 🚀🔥
