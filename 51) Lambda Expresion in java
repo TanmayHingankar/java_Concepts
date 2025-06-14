@@ -1,0 +1,135 @@
+# **Lambda Expressions in Java - Complete Guide**
+
+## **1. What are Lambda Expressions?**
+**Definition**: Lambda expressions are **anonymous functions** (without a name) that provide a concise way to implement functional interfaces.
+
+### **Why Use Lambda Expressions?**
+✔ **Reduces boilerplate code**  
+✔ **Enables functional programming**  
+✔ **Improves readability**  
+✔ **Works seamlessly with Streams API**
+
+---
+
+## **2. Lambda Syntax**
+```java
+(parameters) -> { body }
+```
+- If single parameter: `(x) -> x*x` or `x -> x*x`  
+- If no parameters: `() -> System.out.println("Hello")`  
+- If single statement in body: `(a, b) -> a + b`  
+- If multiple statements: `(a, b) -> { return a + b; }`
+
+---
+
+## **3. Your Code Explained (Line-by-Line)**
+
+### **Example 1: Single Parameter Lambda**
+```java
+@FunctionalInterface
+interface A {
+    void show(int i);  // Single abstract method
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        // Lambda version (most concise)
+        A obj = i -> System.out.println("in show " + i);
+        obj.show(5);  // Output: "in show 5"
+    }
+}
+```
+
+### **Example 2: Multiple Parameters with Return**
+```java
+@FunctionalInterface
+interface A {
+    int add(int i, int j);  // SAM with return type
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        // Lambda with implicit return
+        A obj = (i, j) -> i + j;
+        int result = obj.add(5, 4);  
+        System.out.println(result);  // Output: 9
+    }
+}
+```
+
+---
+
+## **4. Key Concepts**
+
+### **1. Functional Interface Requirement**
+- Lambda can **only be used** with functional interfaces (1 abstract method).
+- Example interfaces: `Runnable`, `Comparator`, `Predicate`.
+
+### **2. Type Inference**
+- Java infers parameter types:
+  ```java
+  // No need to specify types
+  A obj = (i, j) -> i + j;  // i and j inferred as int
+  ```
+
+### **3. Method References**
+- Shortcut for lambdas calling existing methods:
+  ```java
+  List<String> names = Arrays.asList("A", "B");
+  names.forEach(System.out::println);  // Equivalent to (x) -> System.out.println(x)
+  ```
+
+### **4. Effectively Final Variables**
+- Lambdas can access **final or effectively final** variables from outer scope:
+  ```java
+  int x = 10;
+  Runnable r = () -> System.out.println(x);  // x must not be modified later
+  ```
+
+---
+
+## **5. Common Functional Interfaces**
+
+| Interface       | Method               | Lambda Example               |
+|-----------------|----------------------|------------------------------|
+| `Predicate<T>`  | `boolean test(T t)`  | `x -> x > 5`                 |
+| `Function<T,R>` | `R apply(T t)`       | `s -> s.length()`            |
+| `Consumer<T>`   | `void accept(T t)`   | `x -> System.out.println(x)` |
+| `Supplier<T>`   | `T get()`            | `() -> "Hello"`              |
+
+---
+
+## **6. Interview Questions & Answers**
+
+### **Q1: Can lambda expressions have multiple methods?**
+❌ **No!** They can only implement **one abstract method** (functional interface).
+
+### **Q2: Difference between lambda and anonymous class?**
+| **Lambda**               | **Anonymous Class**          |
+|--------------------------|------------------------------|
+| Concise syntax           | Verbose syntax               |
+| Only for functional interfaces | Works with any interface |
+| No `this` shadowing      | Has its own `this` scope     |
+
+### **Q3: Can we use lambda without functional interface?**
+❌ **No!** The target must be a functional interface.
+
+### **Q4: What are method references?**
+✔ **Shortcuts** for lambdas calling existing methods:
+- `System.out::println` = `(x) -> System.out.println(x)`
+- `String::length` = `(s) -> s.length()`
+
+### **Q5: Where are lambdas used in real projects?**
+✔ **Streams API** (`filter`, `map`, `forEach`)  
+✔ **Threading** (`Runnable`, `Callable`)  
+✔ **Event handling** (Button clicks in Swing/JavaFX)
+
+---
+
+## **7. Key Takeaways**
+✔ **Lambdas = Anonymous functions**  
+✔ **Require functional interfaces**  
+✔ **Enable concise, readable code**  
+✔ **Support method references**  
+✔ **Essential for modern Java (Streams, etc.)**
+
