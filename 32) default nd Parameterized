@@ -1,0 +1,111 @@
+class Human {
+	private int age;
+	private String name;
+
+	// Default constructor
+	public Human() {
+		age = 12;
+		name = "John";
+		// Output: John : 12
+	}
+
+	// Constructor with only name (❌ Mistake in logic: age is not set properly)
+	public Human(String name) {
+		this.age = age;         // ❌ Here, age is not initialized — refers to itself (default 0)
+		this.name = name;
+		// Output: name : 0 (if used)
+	}
+
+	// Parameterized constructor with age and name
+	public Human(int age, String name) {
+		this.age = age;
+		this.name = name;
+		// Output: name : age (if used)
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void SetAge(int age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) {
+		Human obj = new Human();  // Calls default constructor
+		System.out.println(obj.getName() + " : " + obj.getAge());  // Output: John : 12
+
+		// Human obj1 = new Human(18, "Navin");
+		// System.out.println(obj1.getName() + " : " + obj1.getAge());  // Output: Navin : 18
+
+		// obj.SetAge(30);
+		// obj.setName("Reddy");
+		// System.out.println(obj.getName() + " : " + obj.getAge());  // Output: Reddy : 30
+	}
+}
+
+
+Constructors in Java: Complete Guide
+Default Constructor
+
+Definition: A constructor with no parameters is called default constructor. If you don't define any constructor, Java provides one implicitly.
+
+Why used: To initialize objects with default values (0, null, false etc.)
+
+Example:
+java
+
+class Bike {
+    Bike() { // default constructor
+        System.out.println("Bike is created");
+    }
+}
+
+Key Points:
+
+    Compiler provides default constructor only if no constructor is defined
+
+    Access modifier is same as class (usually public)
+
+    Initializes instance variables to default values
+
+Parameterized Constructor
+
+Definition: A constructor with parameters is called parameterized constructor.
+
+Why used: To initialize objects with specific values provided at creation time.
+
+Example:
+java
+
+class Student {
+    String name;
+    Student(String n) { // parameterized constructor
+        name = n;
+    }
+}
+
+Constructor Overloading
+
+Definition: Having multiple constructors with different parameters
+
+Why used: To provide different ways to create objects
+
+Example:
+java
+
+class Rectangle {
+    Rectangle() { /* default */ }
+    Rectangle(int l, int b) { /* parameterized */ }
+    Rectangle(int side) { /* square */ }
+}
