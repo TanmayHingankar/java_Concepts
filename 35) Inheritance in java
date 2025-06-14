@@ -1,0 +1,145 @@
+// 🔹 Super / Parent / Base Class
+class Calc 
+{
+	public int add(int n1, int n2)  // Method to add two numbers
+	{
+		return n1 + n2;  // Returns sum
+	}
+
+	public int sub(int n1, int n2)  // Method to subtract two numbers
+	{
+		return n1 - n2;  // Returns difference
+	}
+}
+
+// 🔹 Sub / Child / Derived Class extending Calc (IS-A relationship)
+class AdvCalc extends Calc 
+{
+	public int multi(int n1, int n2)  // Method to multiply two numbers
+	{
+		return n1 * n2;
+	}
+
+	public int div(int n1, int n2)  // Method to divide two numbers
+	{
+		return n1 / n2;
+	}
+}
+
+// 🔹 Main class to test inheritance
+public class Demo 
+{
+	public static void main(String[] args) 
+	{
+		AdvCalc obj = new AdvCalc();  // Child class object created
+
+		System.out.println("Addition: " + obj.add(5, 3));     // Output: 8 (inherited from Calc)
+		System.out.println("Subtraction: " + obj.sub(5, 3));  // Output: 2 (inherited from Calc)
+		System.out.println("Multiplication: " + obj.multi(5, 3)); // Output: 15 (own method)
+		System.out.println("Division: " + obj.div(6, 3));         // Output: 2 (own method)
+	}
+}
+
+
+Inheritance in Java - Complete Guide
+1. What is Inheritance?
+
+Definition: Inheritance allows a child class (subclass) to inherit properties and methods from a parent class (superclass).
+Why Use Inheritance?
+
+✔ Code Reusability – Avoid rewriting common logic
+✔ Method Overriding – Modify parent behavior in child class
+✔ Polymorphism – Treat child objects as parent type
+✔ Abstraction – Hide complex logic behind parent classes
+2. Types of Inheritance
+Type	Description	Java Support?
+Single	One child → One parent	✅ Yes
+Multilevel	Child → Parent → Grandparent	✅ Yes
+Hierarchical	Multiple children → One parent	✅ Yes
+Multiple	One child → Multiple parents	❌ No (but interfaces help)
+Hybrid	Mix of multiple types	❌ No (due to multiple inheritance restriction)
+3. How Inheritance Works?
+🔹 Syntax
+java
+
+class Parent { }  
+class Child extends Parent { }  // 'extends' keyword
+
+🔹 Example
+java
+
+class Animal {  // Parent class
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog extends Animal {  // Child class
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();  // Inherited from Animal
+        d.bark(); // Own method
+    }
+}
+
+Output:
+text
+
+Animal eats  
+Dog barks
+
+4. Key Concepts in Inheritance
+✔ super Keyword
+
+    Used to access parent class members (methods, variables, constructors).
+
+java
+
+class Parent {
+    String name = "Parent";
+}
+
+class Child extends Parent {
+    String name = "Child";
+    
+    void printNames() {
+        System.out.println(name);      // Child
+        System.out.println(super.name); // Parent
+    }
+}
+
+
+ Interview Questions & Answers
+Q1: Why doesn’t Java support multiple inheritance?
+
+    Diamond Problem: If two parents have the same method, which one should the child inherit?
+
+    Solution: Use interfaces (implements keyword).
+
+Q2: What is the difference between extends and implements?
+extends	implements
+Used for class inheritance	Used for interface implementation
+Only one parent class allowed	Multiple interfaces allowed
+Q3: Can a child class access private members of the parent?
+
+❌ No! Private members are not inherited.
+Q4: What is the default parent class in Java?
+
+    Object class (All classes inherit from it by default).
+
+Q5: Can constructors be inherited?
+
+❌ No! But child must call parent constructor (super()).
+6. Key Takeaways
+
+✔ extends → Used for inheritance
+✔ super → Access parent class members
+✔ Method Overriding → Redefine parent methods
+✔ Java supports Single, Multilevel, Hierarchical inheritance
+✔ Multiple inheritance is achieved via interface
