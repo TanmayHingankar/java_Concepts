@@ -1,0 +1,194 @@
+// Uncommented version for better understanding
+
+// Parent class
+class A {
+	public void show() {
+		System.out.println("in A show");  // 🟩 Output when obj refers to A
+	}
+}
+
+// Child class B overriding show()
+class B extends A {
+	public void show() {
+		System.out.println("in B show");  // 🟩 Output when obj refers to B
+	}
+}
+
+// Another child class C overriding show()
+class C extends A {
+	public void show() {
+		System.out.println("in C show");  // 🟩 Output when obj refers to C
+	}
+}
+
+// Unrelated class D (no inheritance)
+class D {
+	// No methods or inheritance
+}
+
+public class Demo {
+	public static void main(String[] args) {
+
+		A obj = new A();      // Reference = A, Object = A
+		obj.show();           // ✅ Output: in A show
+
+		obj = new B();        // Reference = A, Object = B
+		obj.show();           // ✅ Output: in B show (runtime polymorphism)
+
+		obj = new C();        // Reference = A, Object = C
+		obj.show();           // ✅ Output: in C show (runtime polymorphism)
+
+		// obj = new D();     // ❌ Compile-time Error: D is not subclass of A
+
+		// Laptop obj1 = new Laptop();            // ✅ Valid only if Laptop class exists
+		// Computer obj1 = new Laptop();          // ✅ Valid only if Laptop extends Computer
+	}
+}
+
+
+
+# **Final Keyword in Java - Complete Guide**  
+
+## **1. What is `final`?**  
+**Definition**: The `final` keyword is used to **restrict modification** of variables, methods, and classes.  
+
+### **Why Use `final`?**  
+✔ **Security** – Prevent accidental changes  
+✔ **Optimization** – Helps JVM optimize code  
+✔ **Design Clarity** – Shows intent (e.g., constants)  
+
+---
+
+## **2. `final` with Variables**  
+
+### **🔹 Final Primitive Variables (Constant Values)**  
+```java
+final int MAX_SPEED = 120;  // Cannot be changed later
+// MAX_SPEED = 150; → ❌ Compile Error
+```
+
+### **🔹 Final Reference Variables**  
+```java
+final StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World");  // ✅ Allowed (object content can change)
+// sb = new StringBuilder(); → ❌ Error (reference cannot change)
+```
+
+### **🔹 Final Instance Variables**  
+Must be initialized:  
+1. At declaration  
+2. In constructor  
+3. In initialization block  
+
+```java
+class Bike {
+    final int SPEED_LIMIT;  // Blank final variable
+    
+    Bike() {
+        SPEED_LIMIT = 100;  // Must initialize in constructor
+    }
+}
+```
+
+---
+
+## **3. `final` with Methods & Classes**  
+
+### **🔹 Final Methods (Cannot Override)**  
+```java
+class Parent {
+    final void show() {  // Cannot be overridden
+        System.out.println("Parent show");
+    }
+}
+
+class Child extends Parent {
+    // ❌ void show() { } → Error
+}
+```
+
+### **🔹 Final Classes (Cannot Inherit)**  
+```java
+final class MathUtils {  // Cannot extend this class
+    public static double PI = 3.14;
+}
+
+// ❌ class AdvancedMath extends MathUtils { } → Error
+```
+
+---
+
+## **4. Key Concepts & Interview Questions**  
+
+### **✔ Q1: Difference between `final`, `finally`, and `finalize`?**  
+| Keyword | Purpose |  
+|---------|---------|  
+| `final` | Restricts modification |  
+| `finally` | Used in try-catch blocks |  
+| `finalize` | Cleanup method before garbage collection |  
+
+### **✔ Q2: Can we reassign a `final` array's elements?**  
+✅ **Yes!** Only the reference is constant, not content.  
+```java
+final int[] nums = {1, 2, 3};
+nums[0] = 10;  // ✅ Allowed
+// nums = new int[5]; → ❌ Error
+```
+
+### **✔ Q3: Are `final` variables thread-safe?**  
+✅ **Yes!** Once initialized, they are **immutable** and thread-safe.  
+
+### **✔ Q4: Can a `final` class have methods?**  
+✅ **Yes!** It just **cannot be extended**.  
+
+### **✔ Q5: Why make a method `final`?**  
+✔ **Security** (e.g., `Object.getClass()`)  
+✔ **Performance** (JVM can optimize)  
+✔ **Design** (Prevent unwanted overrides)  
+
+---
+
+## **5. Real-World Uses**  
+
+### **🔹 Constants**  
+```java
+public class Constants {
+    public static final double PI = 3.14159;
+    public static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";
+}
+```
+
+### **🔹 Immutable Classes**  
+```java
+public final class ImmutablePerson {
+    private final String name;
+    
+    public ImmutablePerson(String name) {
+        this.name = name;
+    }
+    
+    public String getName() { return name; }
+}
+```
+
+### **🔹 Utility Classes**  
+```java
+public final class StringUtils {
+    private StringUtils() { }  // Prevent instantiation
+    
+    public static boolean isEmpty(String s) {
+        return s == null || s.trim().isEmpty();
+    }
+}
+```
+
+---
+
+## **6. Key Takeaways**  
+✔ **`final` variables** → Cannot be reassigned  
+✔ **`final` methods** → Cannot be overridden  
+✔ **`final` classes** → Cannot be inherited  
+✔ **Blank `final` variables** → Must be initialized in constructor  
+✔ **Thread-safe & optimization-friendly**  
+
+Master these concepts to **ace `final`-related interview questions**! 🚀🔥
