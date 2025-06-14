@@ -1,0 +1,213 @@
+// File: Launch.java
+class Launch {
+    A obj = new A();  // Error: A is not visible (default access, different package)
+    System.out.println(obj.marks); // Error: marks has default access
+}
+
+// File: other/A.java
+package other;
+
+public class A {
+    int marks = 6;  // Default access - only visible within same package
+    // protected marks = 6;  // Corrected: would be visible to subclasses
+    
+    public void show() {
+        // Empty method
+    }
+}
+
+// File: B.java
+public class B {
+    // private int marks;  // Would make marks accessible only within B
+    int marks;  // Default access - visible in same package
+}
+
+// File: C.java
+class C extends A {
+    public void abc() {
+        System.out.println(marks);  // Error: marks in A has default access
+                                  // Would work if marks was protected
+    }
+}
+
+// File: Demo.java
+public class Demo {
+    public static void main(String[] args) {
+        A obj = new A();  // Error: A is in different package and not imported
+        System.out.println(obj.marks);  // Error: marks has default access
+        obj.show();  // Would work if A was accessible
+        
+        B obj1 = new B();
+        System.out.println(obj1.marks);  // Works if in same package
+                                         // Fixed: changed obj to obj1
+    }
+}
+
+
+# **Access Modifiers in Java - Complete Guide**  
+
+## **1. What are Access Modifiers?**  
+**Definition**: Keywords that control the **visibility/accessibility** of classes, methods, and variables.  
+
+### **Why Use Them?**  
+✔ **Encapsulation** – Hide internal details  
+✔ **Security** – Restrict unauthorized access  
+✔ **Control** – Define how classes interact  
+
+---
+
+## **2. Types of Access Modifiers**  
+
+| Modifier | Class | Package | Subclass | World |
+|----------|-------|---------|----------|-------|
+| `public` | ✅ | ✅ | ✅ | ✅ |
+| `protected` | ✅ | ✅ | ✅ | ❌ |
+| **default** (no modifier) | ✅ | ✅ | ❌ | ❌ |
+| `private` | ✅ | ❌ | ❌ | ❌ |
+
+---
+
+## **3. Examples & Usage**  
+
+### **🔹 1. `public` (Most Accessible)**  
+```java
+public class Animal {  
+    public String name; // Accessible everywhere  
+
+    public void eat() {  
+        System.out.println("Eating...");  
+    }  
+}  
+
+// Can be accessed from any other class  
+Animal a = new Animal();  
+a.name = "Dog";  
+a.eat();  
+```
+
+### **🔹 2. `protected` (Package + Subclasses)**  
+```java
+class Vehicle {  
+    protected int speed; // Accessible in subclass + same package  
+
+    protected void accelerate() {  
+        speed += 10;  
+    }  
+}  
+
+class Car extends Vehicle {  
+    void boost() {  
+        accelerate(); // ✅ Works (subclass)  
+        System.out.println(speed); // ✅ Works  
+    }  
+}  
+```
+
+### **🔹 3. `default` (Package-Private)**  
+```java
+class Student {  
+    String rollNo; // Default access (package only)  
+
+    void display() {  
+        System.out.println(rollNo);  
+    }  
+}  
+
+// ❌ Fails if accessed from another package  
+```
+
+### **🔹 4. `private` (Most Restricted)**  
+```java
+class BankAccount {  
+    private double balance; // Only within this class  
+
+    private void deductTax() {  
+        balance -= 100;  
+    }  
+
+    public void withdraw(double amount) {  
+        if (amount <= balance) {  
+            balance -= amount;  
+            deductTax(); // ✅ Private method accessible  
+        }  
+    }  
+}  
+
+// ❌ Fails if accessed from outside  
+// account.balance = 1000; → Error  
+```
+
+---
+
+## **4. Key Concepts**  
+
+### **✔ Where to Use Which Modifier?**  
+| Modifier | When to Use |  
+|----------|------------|  
+| `public` | API methods, constants |  
+| `protected` | For subclass extensions |  
+| `default` | Internal package logic |  
+| `private` | Hide sensitive data |  
+
+### **✔ Getters & Setters (Encapsulation)**  
+```java
+class Person {  
+    private String name;  
+
+    // Getter  
+    public String getName() {  
+        return name;  
+    }  
+
+    // Setter  
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+}  
+```
+
+### **✔ Access Rules for Classes**  
+- A class can be **`public` or `default`**  
+- ❌ **No `private` or `protected` classes** (except nested classes)  
+
+### **✔ Constructor Access**  
+```java
+public class Singleton {  
+    private Singleton() { } // Private constructor  
+
+    public static Singleton getInstance() {  
+        return new Singleton();  
+    }  
+}  
+```
+
+---
+
+## **5. Interview Questions & Answers**  
+
+### **Q1: Can a `private` method be overridden?**  
+❌ **No!** Private methods are **not inherited**, so they cannot be overridden.  
+
+### **Q2: Difference between `protected` and `default`?**  
+| `protected` | `default` |  
+|------------|----------|  
+| ✅ Visible to subclasses | ❌ Not visible to subclasses |  
+| ✅ Same package + child classes | ✅ Only same package |  
+
+### **Q3: Why use `private` variables with `public` getters/setters?**  
+✔ **Encapsulation** – Control how data is accessed/modified.  
+
+### **Q4: Can we declare a top-level class as `protected`?**  
+❌ **No!** Only **`public` or `default`** are allowed.  
+
+### **Q5: What is the default access for interface methods?**  
+✅ **`public abstract`** (even if not explicitly declared).  
+
+---
+
+## **6. Key Takeaways**  
+✔ **`public` → Everywhere | `protected` → Package + Subclasses**  
+✔ **`default` → Package-only | `private` → Class-only**  
+✔ **Use `private` for encapsulation + `public` getters/setters**  
+✔ **Constructors can also have access modifiers**  
+
