@@ -1,0 +1,148 @@
+===============================
+2. INTERFACES & IMPLEMENTATION
+===============================
+*/
+
+interface Computer2 {
+    void code();
+}
+
+class Laptop2 implements Computer2 {
+    public void code() {
+        System.out.println("code, compile, run"); // Output
+    }
+}
+
+class Desktop2 implements Computer2 {
+    public void code() {
+        System.out.println("code, compile, faster"); // Output
+    }
+}
+
+class Developer2 {
+    public void devApp(Computer2 lap) {
+        lap.code();
+    }
+}
+
+public class Demo2 {
+    public static void main(String[] args) {
+        Computer2 lap = new Laptop2();
+        Computer2 desk = new Desktop2();
+
+        Developer2 navin = new Developer2();
+        navin.devApp(lap);  // Output: code, compile, run
+        navin.devApp(desk); // Output: code, compile, faster
+    }
+}
+
+/*
+==================================
+3. INTERFACE VARIABLES & MULTIPLE INTERFACES
+==================================
+*/
+
+interface A {
+    int age = 44;          // public static final by default
+    String area = "Mumbai"; // public static final by default
+
+    void show();
+    void config();
+}
+
+class B implements A {
+    public void show() {
+        System.out.println("in show"); // Output
+    }
+    public void config() {
+        System.out.println("in config"); // Output
+    }
+}
+
+public class Demo3 {
+    public static void main(String[] args) {
+        A obj = new B();
+        obj.show();        // Output: in show
+        obj.config();      // Output: in config
+
+        System.out.println(A.area); // Output: Mumbai
+    }
+}
+
+/*
+===================================
+4. MULTIPLE INTERFACE INHERITANCE
+===================================
+*/
+
+interface X {
+    void run();
+}
+
+interface Y extends X {
+    // inherits run()
+}
+
+class C implements A, Y {
+    public void show() {
+        System.out.println("in show"); // Output
+    }
+    public void config() {
+        System.out.println("in config"); // Output
+    }
+    public void run() {
+        System.out.println("running..."); // Output
+    }
+}
+
+public class Demo4 {
+    public static void main(String[] args) {
+        A obj = new C();
+        obj.show();        // Output: in show
+        obj.config();      // Output: in config
+
+        X obj1 = new C();
+        obj1.run();        // Output: running...
+
+        System.out.println(A.area); // Output: Mumbai
+    }
+}
+
+/*
+===================================
+5. THEORETICAL NOTES FOR REVISION
+===================================
+
+✔ static variable:
+- Shared across all objects of the class
+- Stored in method area of memory
+- Declared with: static int x;
+
+✔ static method:
+- Belongs to class
+- Can be called without object
+- Can't use 'this' keyword or access non-static members directly
+
+✔ this keyword:
+- Refers to current object
+- Used to resolve ambiguity between local and instance variable
+- Can be used to invoke current class constructor with this()
+
+✔ new keyword:
+- Used to create object and allocate memory in heap
+- Syntax: ClassName obj = new ClassName();
+
+✔ interface:
+- 100% abstraction
+- Variables are public static final
+- Methods are public abstract (implicitly)
+
+✔ abstract class:
+- Partial abstraction
+- Can have constructors and concrete methods
+- Methods can be abstract or non-abstract
+
+✔ class-class: extends
+✔ class-interface: implements
+✔ interface-interface: extends
+*/
