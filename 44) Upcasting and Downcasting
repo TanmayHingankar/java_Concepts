@@ -1,0 +1,67 @@
+✅ PART 1: Java Code Explanation — Upcasting & Downcasting
+
+class A {
+	public void show1() {
+		System.out.println("in A show"); // ✅ Output when show1() is called
+	}
+}
+
+class B extends A {
+	public void show2() {
+		System.out.println("in show B"); // ✅ Output when show2() is called
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) {
+		
+//		double d = 4.5;
+//		int i = (int) d; // Type casting from double to int
+//		System.out.println(i); // ✅ Output: 4
+		
+//		A obj = new A();      // Reference of A pointing to object of A
+//		A obj = (A) new B();  // ✅ Upcasting: child object to parent reference
+//		obj.show1();          // ✅ Output: in A show
+
+		A obj = new B();       // ✅ Upcasting (B object, A reference)
+		obj.show1();           // ✅ Output: in A show (method from class A)
+
+		B obj1 = (B) obj;      // ✅ Downcasting to access B-specific methods
+		obj1.show2();          // ✅ Output: in show B
+	}
+}
+
+✅ OUTPUT:
+
+in A show
+in show B
+
+🔍 Interview Concepts Covered:
+🔹 Upcasting (Child → Parent)
+
+A obj = new B(); // ✅ Allowed
+
+    Done implicitly.
+
+    Only parent class methods are accessible.
+
+    Useful for runtime polymorphism.
+
+🔹 Downcasting (Parent → Child)
+
+B obj1 = (B) obj; // ✅ Explicit cast
+
+    Requires explicit type casting.
+
+    Runtime error if original object is not of child type.
+
+    Used when we want to access child-specific methods.
+
+
+✅ PART 2: Java Keywords – static, this, new
+🔷 static Keyword – Complete Summary
+Use with	What It Does
+Variable	Shared among all instances
+Method	Belongs to class, not object
+Block	Runs once when class is loaded
+Class (inner)	Static nested class
