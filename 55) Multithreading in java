@@ -1,0 +1,190 @@
+
+
+## 🔥 **Multithreading in Java – Interview Notes + Code**
+
+---
+
+### 🧠 **What is a Thread?**
+
+* A **thread** is the **smallest unit of execution**.
+* **Multithreading** means running **multiple threads** *concurrently* (independent tasks).
+* Improves performance, especially on **multi-core CPUs**.
+* Threads can **share memory** and **CPU**, but care must be taken to avoid conflicts.
+
+---
+
+### 🔹 **Example 1: Multiple Threads**
+
+```java
+class A extends Thread {
+	public void run() {
+		for (int i = 1; i <= 100; i++) {
+			System.out.println("Hi");  // Output: Prints "Hi" 100 times
+		}
+	}
+}
+
+class B extends Thread {
+	public void run() {
+		for (int i = 1; i <= 100; i++) {
+			System.out.println("Hello");  // Output: Prints "Hello" 100 times
+		}
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) {
+		A obj1 = new A();  // Thread 1
+		B obj2 = new B();  // Thread 2
+
+//    	obj1.show();     // ❌ Not valid, show() doesn't exist
+//    	obj2.show();
+
+		obj1.start();  // ✅ Start thread for obj1 → calls run()
+		obj2.start();  // ✅ Start thread for obj2 → calls run()
+
+		// Output (Interleaved):
+		// Hi
+		// Hello
+		// Hi
+		// Hello
+		// ... mixed "Hi" and "Hello" 100 times each
+	}
+}
+```
+
+---
+
+### 🔹 **Example 2: Thread Sleep and Priority**
+
+```java
+class A extends Thread {
+	public void run() {
+		for (int i = 1; i <= 100; i++) {
+			System.out.println("Hi");  // Output: "Hi" 100 times (slightly delayed)
+			try {
+				Thread.sleep(10);  // Sleep for 10ms
+			} catch (InterruptedException e) {
+				e.printStackTrace();  // Error if interrupted
+			}
+		}
+	}
+}
+
+class B extends Thread {
+	public void run() {
+		for (int i = 1; i <= 100; i++) {
+			System.out.println("Hello");  // Output: "Hello" 100 times
+			try {
+				Thread.sleep(10);  // Sleep for 10ms
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+public class Demo {
+	public static void main(String[] args) {
+		A obj1 = new A();
+		B obj2 = new B();
+
+		obj2.setPriority(Thread.MAX_PRIORITY);  // 👑 Thread B gets max priority (10)
+		System.out.println(obj1.getPriority()); // Output: 5 (default priority)
+
+		obj1.start();  // Start Thread A
+		try {
+			Thread.sleep(2);  // Small delay before starting B
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		obj2.start();  // Start Thread B
+
+		// Output: "Hi" and "Hello" printed interleaved
+		// Thread B might get more preference due to higher priority
+	}
+}
+```
+
+---
+
+## 📘 **Thread Concepts – Interview Notes**
+
+### 🔸 Life Cycle of a Thread
+
+1. **New** → Thread is created.
+2. **Runnable** → After `.start()`, eligible to run.
+3. **Running** → Thread scheduler picks and runs.
+4. **Waiting/Blocked** → Thread is paused.
+5. **Terminated** → Finished execution.
+
+---
+
+### 🔸 Important Methods
+
+| Method              | Description                              |
+| ------------------- | ---------------------------------------- |
+| `.start()`          | Starts thread → internally calls `run()` |
+| `.run()`            | Task to be done in the thread            |
+| `.sleep(ms)`        | Pauses thread for given time             |
+| `.setPriority(int)` | Sets priority (1 to 10)                  |
+| `.getPriority()`    | Returns priority                         |
+| `.join()`           | Waits for a thread to die                |
+| `.isAlive()`        | Checks if thread is alive                |
+
+---
+
+### 🔸 Thread Priority
+
+| Priority Constant      | Value       |
+| ---------------------- | ----------- |
+| `Thread.MIN_PRIORITY`  | 1           |
+| `Thread.NORM_PRIORITY` | 5 (default) |
+| `Thread.MAX_PRIORITY`  | 10          |
+
+> ☝️ Scheduler may or may not obey priorities – depends on OS.
+
+---
+
+### 🔸 `sleep()` and `InterruptedException`
+
+* `sleep(milliseconds)` pauses thread.
+* It throws **`InterruptedException`**, so handle it with `try-catch`.
+
+---
+
+### 🔸 `start()` vs `run()`
+
+| `start()`                         | `run()`                          |
+| --------------------------------- | -------------------------------- |
+| Starts a new thread               | Just calls the method, no thread |
+| JVM creates a separate call stack | Executes in main thread          |
+
+---
+
+## ✅ Output Sample (Interleaved):
+
+```bash
+Hi
+Hello
+Hi
+Hello
+...
+// "Hi" and "Hello" printed 100 times each in random order
+```
+
+---
+
+### 🔖 **Pro Tip for Interview:**
+
+```java
+Thread t1 = new Thread(() -> {
+    for(int i = 0; i < 5; i++) System.out.println("Lambda Hi");
+});
+t1.start();
+```
+
+> ✅ Lambda can be used with functional interfaces like `Runnable`.
+
+---
+
